@@ -2,15 +2,16 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
 type Params = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export async function POST(_: Request, { params }: Params) {
   try {
+    const { slug } = await params;
     const updated = await prisma.blogPost.update({
-      where: { slug: params.slug },
+      where: { slug },
       data: {
         views: {
           increment: 1,

@@ -72,11 +72,13 @@ const AppointmentForm = ({ wrapperClassName, withFrame = true }: AppointmentForm
     };
   };
 
-  const resetForm = () => {
+  const resetForm = (resetStatus = true) => {
     setFormData(initialFormState);
     setFieldErrors({});
     setServerMessage("");
-    setStatus("idle");
+    if (resetStatus) {
+      setStatus("idle");
+    }
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -120,7 +122,7 @@ const AppointmentForm = ({ wrapperClassName, withFrame = true }: AppointmentForm
       if (response.ok && data.success) {
         setStatus("success");
         setServerMessage("Teşekkürler! Randevu talebiniz bize ulaştı.");
-        resetForm();
+        resetForm(false);
       } else {
         setStatus("error");
         setServerMessage(
@@ -136,6 +138,8 @@ const AppointmentForm = ({ wrapperClassName, withFrame = true }: AppointmentForm
   };
 
   const showSuccessState = status === "success";
+  const serverMessageColor =
+    status === "success" ? "text-green-600" : status === "error" ? "text-red-600" : "text-slate-600";
   const containerClasses = withFrame
     ? `rounded-[32px] border border-white/60 bg-white/90 p-5 shadow-[0_35px_120px_rgba(15,23,42,0.18)] backdrop-blur-lg md:p-8 ${wrapperClassName ?? ""}`
     : wrapperClassName ?? "";
@@ -174,7 +178,7 @@ const AppointmentForm = ({ wrapperClassName, withFrame = true }: AppointmentForm
           <button
             type="button"
             className="inline-flex items-center justify-center rounded-full border border-[#384B70] px-6 py-3 text-sm font-semibold text-[#384B70] transition hover:bg-[#F8F4EF]"
-            onClick={resetForm}
+            onClick={() => resetForm()}
           >
             Başka Talep Gönder
           </button>
@@ -236,14 +240,12 @@ const AppointmentForm = ({ wrapperClassName, withFrame = true }: AppointmentForm
           </div>
           <button
             type="submit"
-            className="inline-flex w-full items-center justify-center rounded-full border border-[#384B70] bg-[#384B70] px-6 py-3 text-sm font-semibold text-white transition hover:bg-opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7C3A3]"
+            className="inline-flex w-full items-center justify-center rounded-full border border-[#384B70] bg-[#384B70] px-6 py-3 text-sm font-semibold text-white transition hover:bg-opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7C3A3]"
             disabled={status === "loading"}
           >
             {status === "loading" ? "Gönderiliyor..." : "Gönder"}
           </button>
-          {serverMessage ? (
-            <p className={`text-sm ${status === "success" ? "text-green-600" : "text-red-600"}`}>{serverMessage}</p>
-          ) : null}
+          {serverMessage ? <p className={`text-sm ${serverMessageColor}`}>{serverMessage}</p> : null}
         </form>
       )}
     </div>

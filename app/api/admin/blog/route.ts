@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/db";
 import { blogPayloadSchema } from "@/lib/validators/blog";
 import { generateUniqueSlug } from "@/lib/services/blog";

@@ -145,7 +145,7 @@ const Home = () => {
                   />
                   <h3 className="text-lg font-semibold text-slate-900">{doctor.name}</h3>
                   <p className="mb-3 text-xs uppercase tracking-[0.3em] text-slate-400">{doctor.title}</p>
-                  <p className="text-sm leading-relaxed text-slate-600">{doctor.description}</p>
+                  <p className="text-sm leading-relaxed text-slate-600">{doctor.summary}</p>
                 </div>
               ))}
             </div>

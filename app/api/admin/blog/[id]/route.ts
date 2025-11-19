@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth";
 import { prisma } from "@/lib/db";
 import { blogPayloadSchema } from "@/lib/validators/blog";
 import { generateUniqueSlug } from "@/lib/services/blog";
 import { authOptions } from "@/lib/auth";
 
 type RouteParams = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export async function PUT(request: Request, { params }: RouteParams) {
@@ -18,7 +18,8 @@ export async function PUT(request: Request, { params }: RouteParams) {
     return NextResponse.json({ message: "Yetkisiz" }, { status: 401 });
   }
 
-  const blogId = Number(params.id);
+  const { id } = await params;
+  const blogId = Number(id);
 
   if (Number.isNaN(blogId)) {
     return NextResponse.json({ message: "Geçersiz blog ID" }, { status: 400 });
@@ -54,14 +55,15 @@ export async function PUT(request: Request, { params }: RouteParams) {
   }
 }
 
-export async function DELETE(_: Request, { params }: RouteParams) {
+export async function DELETE(_request: Request, { params }: RouteParams) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
     return NextResponse.json({ message: "Yetkisiz" }, { status: 401 });
   }
 
-  const blogId = Number(params.id);
+  const { id } = await params;
+  const blogId = Number(id);
 
   if (Number.isNaN(blogId)) {
     return NextResponse.json({ message: "Geçersiz blog ID" }, { status: 400 });
