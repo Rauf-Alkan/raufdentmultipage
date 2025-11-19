@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --accent-gold: #d7c3a3;
+  --accent-navy: #384b70;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  font-family: var(--font-geist-sans), "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-heading {
+  font-family: var(--font-playfair), "Playfair Display", "Times New Roman", serif;
+  letter-spacing: -0.01em;
+}
+
+.accent-line {
+  height: 2px;
+  width: 64px;
+  border-radius: 999px;
+  background: var(--accent-gold);
+  display: inline-flex;
+}
+
+@keyframes success-alert-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-success-alert {
+  animation: success-alert-pop 0.45s ease forwards;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.8s ease forwards;
+}
