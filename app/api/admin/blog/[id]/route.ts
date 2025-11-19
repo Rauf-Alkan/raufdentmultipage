@@ -5,7 +5,16 @@ import { blogPayloadSchema } from "@/lib/validators/blog";
 import { generateUniqueSlug } from "@/lib/services/blog";
 import { authOptions } from "@/lib/auth";
 
-export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
+type BlogRouteContext = {
+  params: {
+    id: string;
+  };
+};
+
+export async function PUT(
+  request: NextRequest,
+  { params }: BlogRouteContext
+) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
@@ -49,7 +58,10 @@ export async function PUT(request: NextRequest, { params }: { params: { id: stri
   }
 }
 
-export async function DELETE(_request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(
+  _request: NextRequest,
+  { params }: BlogRouteContext
+) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
