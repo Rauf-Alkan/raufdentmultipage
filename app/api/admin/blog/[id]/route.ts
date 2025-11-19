@@ -1,24 +1,18 @@
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
+import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth/next";
 import { prisma } from "@/lib/db";
 import { blogPayloadSchema } from "@/lib/validators/blog";
 import { generateUniqueSlug } from "@/lib/services/blog";
 import { authOptions } from "@/lib/auth";
 
-type RouteParams = {
-  params: Promise<{
-    id: string;
-  }>;
-};
-
-export async function PUT(request: Request, { params }: RouteParams) {
+export async function PUT(request: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
     return NextResponse.json({ message: "Yetkisiz" }, { status: 401 });
   }
 
-  const { id } = await params;
+  const { id } = params;
   const blogId = Number(id);
 
   if (Number.isNaN(blogId)) {
@@ -55,14 +49,14 @@ export async function PUT(request: Request, { params }: RouteParams) {
   }
 }
 
-export async function DELETE(_request: Request, { params }: RouteParams) {
+export async function DELETE(_request: NextRequest, { params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
     return NextResponse.json({ message: "Yetkisiz" }, { status: 401 });
   }
 
-  const { id } = await params;
+  const { id } = params;
   const blogId = Number(id);
 
   if (Number.isNaN(blogId)) {

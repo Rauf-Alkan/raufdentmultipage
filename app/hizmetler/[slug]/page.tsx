@@ -300,8 +300,8 @@ export const generateStaticParams = () => {
   return Object.keys(detailContent).map((slug) => ({ slug }));
 };
 
-export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
-  const { slug } = await params;
+export const generateMetadata = async ({ params }: { params: { slug: string } }): Promise<Metadata> => {
+  const { slug } = params;
   const detail = detailContent[slug];
   if (!detail) {
     return {
@@ -318,8 +318,8 @@ export const generateMetadata = async ({ params }: { params: Promise<{ slug: str
 
 const whatsappUrl = "https://wa.me/905455555050?text=Merhaba%2C%20randevu%20almak%20istiyorum.";
 
-const ServiceDetailPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  const { slug } = await params;
+const ServiceDetailPage = async ({ params }: { params: { slug: string } }) => {
+  const { slug } = params;
   const detail = detailContent[slug];
 
   if (!detail) {

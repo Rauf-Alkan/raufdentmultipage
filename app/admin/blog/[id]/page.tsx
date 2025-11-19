@@ -4,16 +4,14 @@ import { prisma } from "@/lib/db";
 import { authOptions } from "@/lib/auth";
 import BlogForm from "../_components/BlogForm";
 
-// Next.js 15/16 için params tipi Promise olmalı
 type AdminBlogDetailProps = {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 };
 
-const EditBlogPage = async (props: AdminBlogDetailProps) => {
-  // Önce params'ı await ediyoruz
-  const params = await props.params;
+const EditBlogPage = async ({ params }: AdminBlogDetailProps) => {
+  const { id } = params;
 
   const session = await getServerSession(authOptions);
 
@@ -21,7 +19,7 @@ const EditBlogPage = async (props: AdminBlogDetailProps) => {
     redirect("/admin/login");
   }
 
-  const blogId = Number(params.id);
+  const blogId = Number(id);
 
   if (Number.isNaN(blogId)) {
     notFound();
