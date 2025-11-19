@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { authOptions } from "@/lib/auth";
