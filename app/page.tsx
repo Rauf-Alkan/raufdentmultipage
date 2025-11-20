@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/sections/Header";
 import HeroSlider from "@/components/hero/HeroSlider";
-import FourFeatures from "@/components/sections/FourFeatures";
 import PatientTestimonials from "@/components/sections/PatientTestimonials";
 import Footer from "@/components/sections/Footer";
 import { services } from "@/components/sections/Services";
 import { teamMembers } from "@/components/sections/Team";
-import { aboutContent } from "@/components/sections/About";
+import { prisma } from "@/lib/db";
 
 export const metadata: Metadata = {
   title: "Ana Sayfa | Rauf Dent",
@@ -15,16 +15,33 @@ export const metadata: Metadata = {
     "Ankara Kızılay'da modern, konforlu diş hekimliği; uzman ekibimiz gülüşünüzü sağlık, estetik ve konfor dengesiyle yeniden tasarlar.",
 };
 
-const Home = () => {
-  const featuredServices = services.slice(0, 3);
+export const dynamic = "force-dynamic";
+
+const formatBlogDate = (date: Date) => {
+  try {
+    return new Intl.DateTimeFormat("tr-TR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(date);
+  } catch {
+    return date.toISOString().split("T")[0];
+  }
+};
+
+const Home = async () => {
+  const featuredServices = services.slice(0, 6);
   const featuredTeam = teamMembers.slice(0, 2);
+  const latestPosts = await prisma.blogPost.findMany({
+    orderBy: { publishedAt: "desc" },
+    take: 3,
+  });
 
   return (
     <>
       <Header />
       <main>
         <HeroSlider />
-        <FourFeatures />
         <section className="bg-white py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
@@ -68,54 +85,69 @@ const Home = () => {
           </div>
         </section>
 
-        <PatientTestimonials />
-
-        <section className="bg-gradient-to-b from-white to-slate-50 py-24">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 md:grid-cols-2 lg:px-8">
-            <div className="order-2 space-y-6 md:order-1">
-              <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">
-                {aboutContent.eyebrow}
+        <section className="bg-gradient-to-b from-white via-slate-50 to-white py-24">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">Blog &amp; Makaleler</p>
+              <h2 className="font-heading text-3xl tracking-tight text-slate-900 md:text-4xl">Son Yazılarımız</h2>
+              <div className="mx-auto accent-line" />
+              <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-slate-600">
+                Diş sağlığınızla ilgili güncel bilgiler, estetik yaklaşımlar ve uzman önerilerini blog yazılarımızdan takip
+                edin.
               </p>
-              <h2 className="font-heading text-3xl tracking-tight text-slate-900 md:text-4xl">
-                {aboutContent.title}
-              </h2>
-              <p className="text-lg leading-relaxed text-slate-600">{aboutContent.description}</p>
-              <ul className="space-y-2 text-base text-slate-600">
-                {aboutContent.bullets.slice(0, 2).map((bullet) => (
-                  <li
-                    key={bullet}
-                    className="flex items-start gap-2"
-                  >
-                    <span className="mt-1 h-2 w-2 rounded-full bg-[#D7C3A3]" />
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap gap-3">
-                <Link
-                  href="/hakkimizda"
-                  className="inline-flex items-center justify-center rounded-full border border-[#384B70] bg-[#384B70] px-7 py-3 font-semibold text-white transition hover:bg-opacity-90"
-                >
-                  Kliniği Tanıyın
-                </Link>
-                <Link
-                  href="/iletisim"
-                  className="inline-flex items-center justify-center rounded-full border border-[#D7C3A3] px-7 py-3 font-semibold text-[#384B70] transition hover:bg-[#F8F4EF]"
-                >
-                  Randevu ve İletişim
-                </Link>
-              </div>
             </div>
-            <div className="order-1 md:order-2">
-              <img
-                src={aboutContent.image.src}
-                alt={aboutContent.image.alt}
-                className="h-full w-full rounded-3xl object-cover shadow-[0_35px_90px_rgba(15,23,42,0.15)]"
-                loading="lazy"
-              />
+
+            {latestPosts.length > 0 ? (
+              <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {latestPosts.map((post) => (
+                  <article
+                    key={post.id}
+                    className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-slate-100 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.15)]"
+                  >
+                    <div className="relative h-52 w-full overflow-hidden">
+                      <Image
+                        src={post.coverImage || "/hero.webp"}
+                        alt={post.title}
+                        fill
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col p-6">
+                      <time className="text-xs font-semibold uppercase tracking-[0.35em] text-[#6B5A45]">
+                        {formatBlogDate(post.publishedAt)}
+                      </time>
+                      <h3 className="mt-3 text-xl font-semibold text-slate-900">{post.title}</h3>
+                      <p className="mt-3 flex-1 text-base leading-relaxed text-slate-600 line-clamp-3">{post.summary}</p>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#384B70] transition hover:gap-3"
+                      >
+                        Devamını Oku
+                        <span aria-hidden="true">→</span>
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-12 rounded-3xl border border-dashed border-slate-200 bg-white/70 p-10 text-center text-slate-500">
+                Henüz blog yazısı yayınlanmadı.
+              </div>
+            )}
+
+            <div className="mt-12 text-center">
+              <Link
+                href="/blog"
+                className="inline-flex items-center justify-center rounded-full bg-[#384B70] px-8 py-3.5 text-base font-semibold text-white shadow-[0_20px_45px_rgba(56,75,112,0.3)] transition hover:bg-[#2F3D61]"
+              >
+                Tüm Blog Yazılarını Görüntüle
+              </Link>
             </div>
           </div>
         </section>
+
+        <PatientTestimonials />
 
         <section className="bg-gradient-to-b from-white to-slate-50 py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

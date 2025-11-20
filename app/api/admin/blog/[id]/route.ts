@@ -6,22 +6,19 @@ import { generateUniqueSlug } from "@/lib/services/blog";
 import { authOptions } from "@/lib/auth";
 
 type BlogRouteContext = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
-export async function PUT(
-  request: NextRequest,
-  { params }: BlogRouteContext
-) {
+export async function PUT(request: NextRequest, context: BlogRouteContext) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
     return NextResponse.json({ message: "Yetkisiz" }, { status: 401 });
   }
 
-  const { id } = params;
+  const { id } = await context.params;
   const blogId = Number(id);
 
   if (Number.isNaN(blogId)) {
@@ -58,17 +55,14 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  _request: NextRequest,
-  { params }: BlogRouteContext
-) {
+export async function DELETE(_request: NextRequest, context: BlogRouteContext) {
   const session = await getServerSession(authOptions);
 
   if (!session) {
     return NextResponse.json({ message: "Yetkisiz" }, { status: 401 });
   }
 
-  const { id } = params;
+  const { id } = await context.params;
   const blogId = Number(id);
 
   if (Number.isNaN(blogId)) {

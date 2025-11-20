@@ -72,3 +72,36 @@ body {
 .animate-fade-up {
   animation: fade-up 0.8s ease forwards;
 }
+
+@keyframes wpp-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px 12px rgba(37, 211, 102, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.animate-wpp-pulse {
+  animation: wpp-pulse 2s infinite;
+}
+
+@keyframes wpp-soft {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+.animate-wpp-soft {
+  animation: wpp-soft 1.8s infinite ease-in-out;
+}

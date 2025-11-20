@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+// Kendi component yollarını buraya göre güncellemen gerekebilir:
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
 import { services } from "@/components/sections/Services";
+
+// --- VERİ YAPISI (Görsellerdeki İçerik Mantığına Göre) ---
 
 const servicesMap = Object.fromEntries(services.map((service) => [service.slug, service])) as Record<
   string,
@@ -13,286 +16,157 @@ const servicesMap = Object.fromEntries(services.map((service) => [service.slug, 
 type ServiceDetail = {
   slug: string;
   title: string;
-  heroEyebrow: string;
   heroTitle: string;
   heroDescription: string;
   heroImage: string;
-  heroImageAlt: string;
-  stats: { label: string; value: string }[];
-  advantages: { icon: string; title: string; description: string }[];
-  steps: { title: string; description: string }[];
-  beforeAfter?: {
-    before: { image: string; label: string };
-    after: { image: string; label: string };
-    description: string;
+  content: {
+    intro: string;
+    sections: { title?: string; text: string }[]; // Alt başlık ve paragraflar
+    listTitle?: string;
+    listItems?: string[];
   };
+  faqs: { question: string; answer: string }[];
+  cta: { title: string; text: string; buttonText: string };
 };
 
+// Örnek içerik: İmplant (Diğerlerini de aynı formatta doldurabilirsin)
 const detailContent: Record<string, ServiceDetail> = {
   implant: {
     slug: "implant",
-    title: servicesMap["implant"].title,
-    heroEyebrow: "İmplant Tedavisi",
-    heroTitle: "Eksik dişler için dijital planlı, kalıcı implant çözümleri",
-    heroDescription:
-      "İlk muayeneden itibaren taramalar, tedavi simülasyonu ve kişiye özel cerrahi rehberlerle süreci şeffaf şekilde yönetiyoruz. Konforlu klinik ortamında iyileşme sürecinizi adım adım takip ediyoruz.",
-    heroImage: "/services/implant-hero.webp",
-    heroImageAlt: "İmplant tedavisi sırasında uzman diş hekimi",
-    stats: [
-      { value: "98%", label: "Uzun dönem başarı" },
-      { value: "7.000+", label: "Planlanan implant" },
-      { value: "15+ yıl", label: "Cerrahi deneyim" },
-    ],
-    beforeAfter: {
-      before: {
-        image: "/hero.webp",
-        label: "İşlem Öncesi",
-      },
-      after: {
-        image: "/services/implant-hero.webp",
-        label: "İşlem Sonrası",
-      },
-      description:
-        "Dijital planlamayla implant yerleşimini önceden simüle ediyor, porselen restorasyonlarla estetik ve fonksiyonu aynı anda geri kazandırıyoruz.",
+    title: "İmplant Tedavisi",
+    heroTitle: "İmplant Tedavisi",
+    heroDescription: "Eksik dişlerin yerine doğal görünümlü ve fonksiyonel dişler kazandıran modern diş hekimliğinin en etkili çözümüdür.",
+    heroImage: "/services/implant-hero.webp", // Buraya kendi görsel yolunu koy
+    content: {
+      intro: "İmplant tedavisi, genel sağlık durumu iyi olan ve yeterli çene kemiği yoğunluğuna sahip hemen hemen tüm yetişkinler için uygundur.",
+      sections: [
+        {
+          title: "İmplant Tedavisi Nedir?",
+          text: "Diş implantı, eksik dişlerin yerine çene kemiğine yerleştirilen, genellikle titanyumdan yapılan yapay diş kökleridir. Doğal diş kökünü taklit eder ve üzerine yapılacak protezlere sağlam bir temel oluşturur.",
+        },
+        {
+          title: "3. Mini İmplantlar",
+          text: "Standart implantlardan daha küçük çaplı implantlardır. Dar kemik alanlarında veya geçici protezleri sabitlemek için kullanılabilir.",
+        },
+        {
+          title: "4. All-on-4 veya All-on-6 İmplant Sistemi",
+          text: "Tam dişsizlik durumunda, tüm çeneyi 4 veya 6 implant üzerine sabitlenmiş protezlerle restore etme tekniğidir. Kemik grefti ihtiyacını azaltır ve hızlı sonuç sağlar.",
+        },
+        {
+          title: "İmplant Tedavisinin Maliyeti",
+          text: "İmplant tedavisinin maliyeti, kullanılan implant markası, implant sayısı, ek cerrahi işlemler (sinüs lifting, kemik grefti vb.) ve üst yapı türüne göre değişiklik gösterir. Tedavi planlaması sırasında detaylı maliyet bilgisi verilir. Başlangıçta maliyetli görünse de ömür boyu kullanım düşünüldüğünde ekonomiktir.",
+        }
+      ],
+      listTitle: "İmplant Tedavisinin Avantajları",
+      listItems: [
+        "Doğal diş görünümü ve fonksiyonu sağlar",
+        "Çene kemiğinin erimesini önler",
+        "Uzun ömürlüdür ve dayanıklıdır",
+        "Komşu dişlere zarar vermez",
+        "Çiğneme fonksiyonunu tam olarak yerine getirir",
+        "Yüz estetiğini korur ve yaşlanma belirtilerini azaltır",
+        "Özgüvenle gülümsemenizi sağlar"
+      ]
     },
-    advantages: [
+    faqs: [
       {
-        icon: "🧠",
-        title: "Kişiye özel dijital tasarım",
-        description: "3D tomografi ve tasarım yazılımlarıyla implant açısını, boyunu ve kemiğe uyumunu önceden belirliyoruz.",
+        question: "İmplant tedavisi ağrılı bir işlem midir?",
+        answer: "Uygulama lokal anestezi altında yapılır. Operasyon sırasında ağrı hissedilmez, sonrasında hafif ağrılar olabilir, genellikle ağrı kesicilerle kontrol altına alınır."
       },
       {
-        icon: "🛡️",
-        title: "Hassas cerrahi protokoller",
-        description:
-          "Steril ameliyathane, rehberli cerrahi ve minimal invaziv yaklaşım sayesinde iyileşme sürecini hızlandırıyoruz.",
+        question: "İmplant herkese uygulanabilir mi?",
+        answer: "Kemik gelişimi tamamlanmış, genel sağlık durumu elverişli olan herkese uygulanabilir. Yetersiz kemik durumunda ek tedaviler gerekebilir."
       },
       {
-        icon: "🤝",
-        title: "Yakın takip & rehberlik",
-        description: "İyileşme döneminde kontrol randevuları, hijyen eğitimleri ve beslenme rehberliği sunuyoruz.",
+        question: "İmplant tedavisi ne kadar sürer?",
+        answer: "İmplantın kemikle kaynaşması (osseointegrasyon) genellikle 2-6 ay sürer. Bu süreçte geçici protezler kullanılır."
       },
+      {
+        question: "İmplantın ömrü ne kadardır?",
+        answer: "İyi bir ağız bakımı ve düzenli kontrollerle implantlar ömür boyu kullanılabilir."
+      }
     ],
-    steps: [
-      { title: "1. Dijital muayene", description: "BT taraması, panoramik görüntü ve diş eti sağlığı değerlendirmesi." },
-      {
-        title: "2. Planlama & simülasyon",
-        description: "Kemiğinize uygun implant modeli, açısı ve protez tasarımı belirlenir.",
-      },
-      {
-        title: "3. Rehberli cerrahi",
-        description: "Lokal anestezi altında minimal kesiyle implant yerleştirilir; gerekirse geçici diş uygulanır.",
-      },
-      {
-        title: "4. İyileşme ve protez",
-        description: "3 ay sonunda abutment ve porselen kronlar tamamlanır, çiğneme fonksiyonunuz test edilir.",
-      },
-    ],
+    cta: {
+      title: "Randevu Alın",
+      text: "İmplant tedavisi hakkında detaylı bilgi almak ve hekimlerimizle görüşmek için hemen randevu alın.",
+      buttonText: "RANDEVU TALEBİ OLUŞTUR"
+    }
   },
+  // Diğer sayfalar için (Slug eşleşmesi olmazsa 404 verir, burayı doldurmalısın)
   "gulus-tasarimi": {
-    slug: "gulus-tasarimi",
-    title: servicesMap["gulus-tasarimi"].title,
-    heroEyebrow: "Gülüş Tasarımı",
-    heroTitle: "Simetrik, doğal ve yüz hatlarınıza uygun gülüş tasarımı",
-    heroDescription:
-      "Fotoğraf ve video çekimleriyle mevcut gülüşünüzü analiz ediyor, mock-up çalışmalarıyla tedavi sonucunu önceden gösteriyoruz. Lamina, bonding ve porselen uygulamalarını kombine planlıyoruz.",
-    heroImage: "/services/gulus-hero.webp",
-    heroImageAlt: "Gülüş tasarımı için planlama yapan diş hekimi",
-    stats: [
-      { value: "48 saat", label: "Mock-up süresi" },
-      { value: "5.000+", label: "Tamamlanan tasarım" },
-      { value: "360°", label: "Foto-video analizi" },
-    ],
-    advantages: [
-      {
-        icon: "📸",
-        title: "Yüz hatlarına göre analiz",
-        description: "Dudak çizgisi, yüz oranları ve konuşma dinamiklerini birlikte değerlendiriyoruz.",
-      },
-      {
-        icon: "🧪",
-        title: "Önce prova sonra işlem",
-        description: "Wax-up ve mock-up ile tasarımı ağızda deneyimleyip onayladıktan sonra uygulamaya geçiyoruz.",
-      },
-      {
-        icon: "💎",
-        title: "Uzun ömürlü materyaller",
-        description: "Lamina, e.max ve zirkonyum gibi yüksek dayanım ve estetik sağlayan materyaller kullanıyoruz.",
-      },
-    ],
-    steps: [
-      { title: "1. Fotoğraf & video çekimi", description: "Gülüşünüz farklı açılardan kaydedilir ve analiz edilir." },
-      { title: "2. Dijital tasarım", description: "Diş boyu, gingiva hattı ve simetri parametreleri optimize edilir." },
-      { title: "3. Mock-up prova", description: "Geçici materyallerle tasarım ağızda test edilir, revizyonlar yapılır." },
-      {
-        title: "4. Nihai uygulama",
-        description: "Lamina veya porselen restorasyonlar hassas ölçüyle hazırlanıp kalıcı olarak yapıştırılır.",
-      },
-    ],
+     slug: "gulus-tasarimi",
+     title: "Gülüş Tasarımı",
+     heroTitle: "Gülüş Tasarımı",
+     heroDescription: "Yüz hatlarınıza en uygun, estetik ve doğal gülüşü dijital yöntemlerle tasarlıyoruz.",
+     heroImage: "/services/gulus-hero.webp",
+     content: {
+        intro: "Gülüş tasarımı, estetik beklentilerinizi fonksiyonellikle birleştiren kapsamlı bir süreçtir.",
+        sections: [{title: "Süreç Nasıl İşler?", text: "Fotoğraf analizi ve dijital modelleme ile başlar."}],
+        listTitle: "Kimler İçin Uygundur?",
+        listItems: ["Diş renginden memnun olmayanlar", "Dişlerinde çapraşıklık olanlar"]
+     },
+     faqs: [{question: "Kalıcı mıdır?", answer: "Evet, kullanılan porselenler uzun ömürlüdür."}],
+     cta: {title: "Randevu Alın", text: "Hayalinizdeki gülüş için ilk adımı atın.", buttonText: "RANDEVU AL"}
   },
-  "dis-beyazlatma": {
-    slug: "dis-beyazlatma",
-    title: servicesMap["dis-beyazlatma"].title,
-    heroEyebrow: "Diş Beyazlatma",
-    heroTitle: "30 dakikalık ofis tipi beyazlatmayla eşit tonlu gülüş",
-    heroDescription:
-      "Hassasiyet riskini azaltan jel ve LED kombinasyonuyla kısa sürede birkaç tona kadar açılma sağlıyoruz. Ev tipi kitlerle ton korumasını destekliyoruz.",
-    heroImage: "/services/beyazlatma-hero.webp",
-    heroImageAlt: "Ofis tipi diş beyazlatma uygulaması",
-    stats: [
-      { value: "30 dk", label: "Ofis tipi süre" },
-      { value: "3-6 ton", label: "Parlaklık artışı" },
-      { value: "0", label: "Ağrı / hassasiyet hedefi" },
-    ],
-    advantages: [
-      {
-        icon: "🪥",
-        title: "Kişiye özel protokol",
-        description: "Mine yapınıza göre jel yoğunluğu belirlenir, diş etleri koruyucu bariyerle izole edilir.",
-      },
-      {
-        icon: "🏠",
-        title: "Ev tipi destek",
-        description: "Ofis uygulamasını kalıcı hale getirmek için ölçüye özel plaklar ve düşük yoğunluklu jel verilir.",
-      },
-      {
-        icon: "📝",
-        title: "Bakım rehberi",
-        description: "Tonal değişimi korumak için beslenme, kahve/çay tüketimi ve fırçalama rutini planlanır.",
-      },
-    ],
-    steps: [
-      { title: "1. Muayene & hassasiyet testi", description: "Mine çatlakları ve diş eti sağlığı kontrol edilir." },
-      { title: "2. Ofis tipi beyazlatma", description: "Koruyucu bariyer sonrası jel uygulanır ve LED ışık aktive edilir." },
-      { title: "3. Ev tipi kit teslimi", description: "Ölçüye özel plaklar hazırlanır, kullanım programı anlatılır." },
-      { title: "4. Kontrol ziyareti", description: "1-2 hafta sonra ton kalıcılığı değerlendirilir, gerekirse rötuş yapılır." },
-    ],
+   "dis-beyazlatma": {
+     slug: "dis-beyazlatma",
+     title: "Diş Beyazlatma",
+     heroTitle: "Profesyonel Diş Beyazlatma",
+     heroDescription: "Daha parlak ve beyaz dişlere sahip olmak için güvenli ve hızlı çözümler.",
+     heroImage: "/services/beyazlatma-hero.webp",
+     content: {
+        intro: "Zamanla sararan dişlerinizi ofis tipi beyazlatma ile eski parlaklığına kavuşturuyoruz.",
+        sections: [{title: "Zararlı mı?", text: "Hayır, mine yapısına zarar vermez."}],
+        listTitle: "Avantajları",
+        listItems: ["Hızlı sonuç", "Ağrısız işlem", "Uzun süre kalıcılık"]
+     },
+     faqs: [{question: "Hassasiyet olur mu?", answer: "İlk 24 saat hafif hassasiyet olabilir."}],
+     cta: {title: "Randevu Alın", text: "Parlak bir gülüş için randevu oluşturun.", buttonText: "RANDEVU AL"}
   },
   ortodonti: {
-    slug: "ortodonti",
-    title: servicesMap["ortodonti"].title,
-    heroEyebrow: "Ortodonti",
-    heroTitle: "Şeffaf plak veya sabit tel ile konforlu hizalama",
-    heroDescription:
-      "Çocuk ve yetişkinler için çapraşıklık seviyesine göre Invisalign, şeffaf plak veya estetik braket alternatifleri sunuyoruz. Dijital taramalarla her aşamada ilerlemeyi takip ediyoruz.",
-    heroImage: "/services/ortodonti-hero.webp",
-    heroImageAlt: "Ortodonti tedavisi planlayan diş hekimi",
-    stats: [
-      { value: "12-18 ay", label: "Ortalama süre" },
-      { value: "5.500+", label: "Tamamlanan vaka" },
-      { value: "100%", label: "Dijital planlama" },
-    ],
-    advantages: [
-      {
-        icon: "🧭",
-        title: "3D tarama & simülasyon",
-        description: "Tedavi başlamadan final hizalamayı görebilir, farklı senaryoları değerlendirirsiniz.",
-      },
-      {
-        icon: "🛋️",
-        title: "Konforlu takip",
-        description: "Online ve yüz yüze takip randevularıyla plak değişimleri ve ayarları planlıyoruz.",
-      },
-      {
-        icon: "🔒",
-        title: "Retainer & pekiştirme",
-        description: "Tedavi sonrası pekiştirme plakları ve retainer protokolüyle kalıcılığı güvence altına alıyoruz.",
-      },
-    ],
-    steps: [
-      { title: "1. Kapsamlı muayene", description: "Çene yapısı, kapanış ve alışkanlıklar değerlendirilir." },
-      { title: "2. Dijital plan & maliyet", description: "Plak sayısı, tedavi süresi ve ödeme planı netleştirilir." },
-      {
-        title: "3. Aktif tedavi",
-        description: "Plak teslimleri veya tel ayarları düzenli aralıklarla gerçekleştirilir.",
-      },
-      {
-        title: "4. Pekiştirme",
-        description: "Retainer uygulamalarıyla yeni konum korunur, kontroller planlanır.",
-      },
-    ],
+     slug: "ortodonti",
+     title: "Ortodonti",
+     heroTitle: "Ortodonti Tedavisi",
+     heroDescription: "Çapraşık dişleri düzeltmek ve ideal kapanışı sağlamak için modern çözümler.",
+     heroImage: "/services/ortodonti-hero.webp",
+     content: {
+        intro: "Tel tedavisi veya şeffaf plaklarla dişlerinizi ideal konumuna getiriyoruz.",
+        sections: [{title: "Yaş Sınırı Var mı?", text: "Her yaşta ortodontik tedavi mümkündür."}],
+        listTitle: "Tedavi Seçenekleri",
+        listItems: ["Metal braketler", "Şeffaf plaklar (Telsiz)", "Porselen braketler"]
+     },
+     faqs: [{question: "Ne kadar sürer?", answer: "Vakaya göre 1-2 yıl arasında değişir."}],
+     cta: {title: "Randevu Alın", text: "Ücretsiz muayene için randevu alın.", buttonText: "RANDEVU AL"}
   },
   "zirkonyum-kaplama": {
-    slug: "zirkonyum-kaplama",
-    title: servicesMap["zirkonyum-kaplama"].title,
-    heroEyebrow: "Zirkonyum / Porselen",
-    heroTitle: "Doğala en yakın ışık geçirgenliğinde kaplamalar",
-    heroDescription:
-      "Kırık, aşınmış veya renk değiştirmiş dişleri güçlendirmek için dijital ölçü ile yüksek hassasiyetli zirkonyum kaplamalar hazırlıyoruz. Eksiksiz diş eti uyumu ve ısırma dengesiyle uzun ömür sağlıyoruz.",
-    heroImage: "/services/zirkonyum-hero.webp",
-    heroImageAlt: "Zirkonyum kaplama hazırlığı yapan diş hekimi",
-    stats: [
-      { value: "48 saat", label: "Geçici kaplama" },
-      { value: "12 yıl+", label: "Ortalama ömür" },
-      { value: "Full CAD/CAM", label: "Dijital üretim" },
-    ],
-    advantages: [
-      {
-        icon: "🖥️",
-        title: "Tarama sonrası dijital ölçü",
-        description: "Ağız içi tarayıcı ile hassas ölçü alınır, laboratuvara dijital data aktarılır.",
-      },
-      {
-        icon: "🎨",
-        title: "Kişiselleştirilmiş renk seçimi",
-        description: "Cilt tonu, göz rengi ve doğal diş renginize uygun tonlar belirlenir.",
-      },
-      {
-        icon: "🧩",
-        title: "Konforlu prova süreci",
-        description: "Geçici kaplamalarla alışma dönemi sağlanır; ısırma ve fonetik ayarları yapılır.",
-      },
-    ],
-    steps: [
-      { title: "1. Muayene & planlama", description: "Diş eti sağlığı, çiğneme düzeni ve estetik beklenti değerlendirilir." },
-      { title: "2. Hazırlık & ölçü", description: "Dişler minimal aşındırılır, dijital ölçü alınır, geçici kaplamalar takılır." },
-      { title: "3. Laboratuvar üretimi", description: "Zirkonyum altyapı ve porselen layering tamamlanır, renk kontrolleri yapılır." },
-      { title: "4. Teslim & takip", description: "Kalıcı yapıştırma sonrası 1. ve 3. ay kontrolleri planlanır." },
-    ],
+     slug: "zirkonyum-kaplama",
+     title: "Zirkonyum Kaplama",
+     heroTitle: "Zirkonyum Diş Kaplama",
+     heroDescription: "Metal desteksiz, ışık geçirgenliği yüksek ve doğal görünümlü kaplamalar.",
+     heroImage: "/services/zirkonyum-hero.webp",
+     content: {
+        intro: "Estetik diş hekimliğinde en çok tercih edilen, doku dostu materyaldir.",
+        sections: [{title: "Neden Zirkonyum?", text: "Diş eti ile mükemmel uyum sağlar ve grileşme yapmaz."}],
+        listTitle: "Kullanım Alanları",
+        listItems: ["Ön diş estetiği", "Kanal tedavili dişlerin restorasyonu"]
+     },
+     faqs: [{question: "Kırılır mı?", answer: "Çok dayanıklı bir malzemedir."}],
+     cta: {title: "Randevu Alın", text: "Doğal görünümlü dişler için bizi arayın.", buttonText: "RANDEVU AL"}
   },
   "dolgu-kanal": {
-    slug: "dolgu-kanal",
-    title: servicesMap["dolgu-kanal"].title,
-    heroEyebrow: "Dolgu & Kanal Tedavisi",
-    heroTitle: "Ağrısız ve hızlı onarımla dişleri koruma altına alın",
-    heroDescription:
-      "Çürük veya enfekte dişlerde mikroskobik kanal tedavisi ve yüksek dayanımlı dolgularla dişinizi çekimden kurtarıyoruz. Tek seansta ağrıyı giderip fonksiyonu geri kazandırıyoruz.",
-    heroImage: "/services/dolgu-hero.webp",
-    heroImageAlt: "Kanal tedavisi yapan diş hekimi",
-    stats: [
-      { value: "Tek seans", label: "Mümkün tedavi" },
-      { value: "99%", label: "Başarı oranı" },
-      { value: "0 ağrı", label: "Hassas anestezi" },
-    ],
-    advantages: [
-      {
-        icon: "💉",
-        title: "Hassas anestezi",
-        description: "İntraligamanter ve bilgisayar kontrollü anestezi ile işlem öncesi ağrıyı tamamen kesiyoruz.",
-      },
-      {
-        icon: "🔬",
-        title: "Mikroskobik temizlik",
-        description: "Kanal içi enfeksiyonları büyütme altında görüp temizleyerek nüks riskini azaltıyoruz.",
-      },
-      {
-        icon: "🧱",
-        title: "Estetik dolgular",
-        description: "Nano hibrit kompozitler ve seramik inlay/onlay seçenekleriyle yüksek dayanım sağlıyoruz.",
-      },
-    ],
-    steps: [
-      { title: "1. Tanı & görüntüleme", description: "Röntgen ve vitalite testleriyle kök kanallarının durumu belirlenir." },
-      {
-        title: "2. Kanal temizliği",
-        description: "Mikromotor ve ultrasonik sistemlerle kök kanalları şekillendirilir, dezenfekte edilir.",
-      },
-      { title: "3. Dolgu / obturasyon", description: "Sızdırmazlık sağlayan pat ve gutta-percha ile kanal doldurulur." },
-      {
-        title: "4. Restorasyon",
-        description: "Kompozit dolgu, inlay veya kuron ile diş güçlendirilir; çiğneme testi yapılır.",
-      },
-    ],
+     slug: "dolgu-kanal",
+     title: "Dolgu ve Kanal Tedavisi",
+     heroTitle: "Dolgu ve Kanal Tedavisi",
+     heroDescription: "Ağrıyan veya çürüyen dişlerinizi çekimden kurtaran koruyucu tedaviler.",
+     heroImage: "/services/dolgu-hero.webp",
+     content: {
+        intro: "Dişin doğal yapısını koruyarak fonksiyonunu geri kazandırmayı hedefleriz.",
+        sections: [{title: "Ağrılı mı?", text: "Lokal anestezi ile tamamen ağrısızdır."}],
+        listTitle: "Belirtiler",
+        listItems: ["Sıcak-soğuk hassasiyeti", "Gece başlayan ağrı", "Diş renginde değişim"]
+     },
+     faqs: [{question: "Tek seansta biter mi?", answer: "Genellikle evet, enfeksiyon durumuna göre değişebilir."}],
+     cta: {title: "Randevu Alın", text: "Diş ağrınızı ertelemeyin.", buttonText: "RANDEVU AL"}
   },
 };
 
@@ -300,26 +174,24 @@ export const generateStaticParams = () => {
   return Object.keys(detailContent).map((slug) => ({ slug }));
 };
 
-export const generateMetadata = async ({ params }: { params: { slug: string } }): Promise<Metadata> => {
-  const { slug } = params;
+export const generateMetadata = async ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
+  const { slug } = await params;
   const detail = detailContent[slug];
   if (!detail) {
     return {
-      title: "Hizmet | Rauf Dent",
-      description: "Rauf Dent klinik hizmetleri",
+      title: "Hizmet Bulunamadı | Rauf Dent",
     };
   }
-
   return {
     title: `${detail.title} | Rauf Dent`,
     description: detail.heroDescription,
   };
 };
 
-const whatsappUrl = "https://wa.me/905455555050?text=Merhaba%2C%20randevu%20almak%20istiyorum.";
+const whatsappUrl = "https://wa.me/905455555050";
 
-const ServiceDetailPage = async ({ params }: { params: { slug: string } }) => {
-  const { slug } = params;
+const ServiceDetailPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
   const detail = detailContent[slug];
 
   if (!detail) {
@@ -329,168 +201,152 @@ const ServiceDetailPage = async ({ params }: { params: { slug: string } }) => {
   return (
     <>
       <Header />
-      <main>
-        <section className="bg-gradient-to-b from-white via-white to-slate-50 py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.15fr_0.85fr]">
+      <main className="bg-[#F8F4EF] pb-20">
+        
+        {/* --- HERO SECTION (Resim + Mavi Çizgi) --- */}
+        <div className="relative h-[300px] w-full bg-[#1F2A44] md:h-[400px] lg:h-[450px]">
+           <img
+            src={detail.heroImage}
+            alt={detail.heroTitle}
+            className="h-full w-full object-cover opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1F2A44]/90 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full">
+            <div className="mx-auto max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
+               <p className="mb-2 text-sm font-medium uppercase tracking-wider text-[#D7C3A3]">Hizmetlerimiz / {detail.title}</p>
+               <h1 className="font-heading text-3xl font-bold text-white md:text-5xl">{detail.heroTitle}</h1>
+               <div className="mt-4 h-1 w-20 rounded-full bg-[#D7C3A3]"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* --- ANA ICERIK GRID (SOL: İçerik | SAĞ: Sticky Sidebar) --- */}
+        <div className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
+            
+            {/* ================= SOL KOLON (Makale / İçerik) ================= */}
+            <div className="space-y-10">
+              
+              {/* Mavi Kutucuklu Giriş */}
+              <div className="relative rounded-2xl border-l-4 border-[#D7C3A3] bg-white p-6 shadow-sm">
+                 <p className="text-lg font-medium leading-relaxed text-slate-700">
+                   {detail.content.intro}
+                 </p>
+              </div>
+
+              {/* Dinamik Bölümler (H3 Başlık ve Paragraflar) */}
               <div className="space-y-8">
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#384B70]">{detail.heroEyebrow}</p>
-                <div className="space-y-4">
-                  <h1 className="font-heading text-3xl tracking-tight text-slate-900 md:text-5xl">{detail.heroTitle}</h1>
-                  <p className="text-lg leading-relaxed text-slate-600 md:text-xl">{detail.heroDescription}</p>
-                </div>
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-                  {detail.stats.map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="rounded-[26px] border border-slate-100 bg-white/95 px-5 py-6 text-center shadow-[0_18px_45px_rgba(15,23,42,0.08)]"
-                    >
-                      <p className="text-3xl font-semibold text-[#384B70]">{stat.value}</p>
-                      <p className="mt-2 text-xs uppercase tracking-[0.35em] text-slate-400">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-8 py-3 text-sm font-semibold text-white shadow-[0_20px_45px_rgba(16,185,129,0.35)] transition hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
-                  >
-                    WhatsApp&apos;tan Randevu Al
-                  </a>
-                  <Link
-                    href="/iletisim#fast-appointment"
-                    className="inline-flex items-center justify-center rounded-full border border-[#D7C3A3] px-8 py-3 text-sm font-semibold text-[#384B70] transition hover:bg-[#F8F4EF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7C3A3]"
-                  >
-                    İlk Muayeneyi Planla
-                  </Link>
-                </div>
+                {detail.content.sections.map((section, idx) => (
+                  <div key={idx}>
+                    {section.title && (
+                      <h3 className="mb-3 font-heading text-2xl font-bold text-slate-800">
+                        {section.title}
+                      </h3>
+                    )}
+                    <p className="text-base leading-7 text-slate-600 md:text-lg">
+                      {section.text}
+                    </p>
+                  </div>
+                ))}
               </div>
-              <div className="relative">
-                <div className="overflow-hidden rounded-[36px] border border-white/60 bg-white/90 shadow-[0_35px_100px_rgba(15,23,42,0.16)]">
-                  <img
-                    src={detail.heroImage}
-                    alt={detail.heroImageAlt}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
+
+              {/* Liste Alanı (Mavi Tik İşaretli) */}
+              {detail.content.listItems && (
+                <div className="rounded-[2rem] bg-[#FFFDF9] p-8 shadow-[0_8px_30px_rgba(215,195,163,0.35)]">
+                  {detail.content.listTitle && (
+                    <h3 className="mb-6 font-heading text-2xl font-bold text-slate-800">
+                      {detail.content.listTitle}
+                    </h3>
+                  )}
+                  <ul className="space-y-4">
+                    {detail.content.listItems.map((item, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#F5E9DC]">
+                          <svg className="h-3 w-3 text-[#B48341]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                        </div>
+                        <span className="text-base text-slate-700">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
+              )}
+
+            </div>
+
+            {/* ================= SAĞ KOLON (Sticky Sidebar) ================= */}
+            <div className="relative h-full">
+              <div className="sticky top-28 space-y-8">
+                
+                {/* 1. BÖLÜM: Sık Sorulan Sorular (Accordion) */}
+                <div>
+                  <h3 className="mb-5 font-heading text-xl font-bold text-slate-900">Sık Sorulan Sorular</h3>
+                  <div className="space-y-3">
+                    {detail.faqs.map((faq, i) => (
+                      <details
+                        key={i}
+                        className="group rounded-xl border border-slate-100 bg-white shadow-sm transition-all duration-200 hover:shadow-md open:shadow-md"
+                      >
+                        <summary className="flex w-full cursor-pointer list-none items-center justify-between p-4 text-left font-semibold text-slate-700 focus:outline-none">
+                          <span className="pr-4 text-sm md:text-base">{faq.question}</span>
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#F8F4EF] text-slate-400 transition group-open:rotate-180 group-open:bg-[#F5E9DC] group-open:text-[#6D4A2F]">
+                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </span>
+                        </summary>
+                        <div className="border-t border-slate-50 px-4 pb-4 pt-2 text-sm leading-relaxed text-slate-600 animate-in fade-in slide-in-from-top-1">
+                          {faq.answer}
+                        </div>
+                      </details>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 2. BÖLÜM: Randevu Kartı (Mavi Butonlu) */}
+                <div className="overflow-hidden rounded-2xl bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] text-center border border-slate-100">
+                  {/* Üst Kısım: İkon ve Başlık */}
+                 <div className="bg-white p-8 pb-6">
+                     <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F5E9DC] text-[#B48341]">
+                        <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                           <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                     </div>
+                     <h3 className="font-heading text-2xl font-bold text-slate-900">{detail.cta.title}</h3>
+                     <p className="mt-3 text-sm text-slate-500 leading-relaxed px-2">
+                        {detail.cta.text}
+                     </p>
+                  </div>
+
+                  {/* Alt Kısım: Mavi Buton */}
+                  <div className="bg-[#F8F4EF] p-6 pt-0">
+                     <Link
+                        href="/iletisim"
+                        className="flex w-full items-center justify-center rounded-xl bg-[#384B70] py-4 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-[#384B70]/30 transition-transform hover:scale-[1.02] hover:shadow-[#384B70]/40 active:scale-[0.98]"
+                     >
+                        {detail.cta.buttonText}
+                     </Link>
+                     <a
+                        href={whatsappUrl}
+                        target="_blank"
+                         rel="noopener noreferrer"
+                        className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-[#E4D7C7] bg-white py-3 text-sm font-semibold text-slate-600 transition hover:bg-[#FDF8F1]"
+                     >
+                        <svg className="h-5 w-5 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        <span>WhatsApp</span>
+                     </a>
+                  </div>
+                </div>
+
               </div>
             </div>
+
           </div>
-        </section>
+        </div>
 
-        {detail.beforeAfter && (
-          <section className="bg-white py-16">
-            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-              <div className="text-center">
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#384B70]">İşlem Öncesi / Sonrası</p>
-                <h2 className="mt-2 font-heading text-3xl text-slate-900">Sonuçları anında gözlemleyin</h2>
-                <p className="mt-3 text-sm text-slate-500">{detail.beforeAfter.description}</p>
-              </div>
-              <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="space-y-3 rounded-3xl border border-slate-100 bg-slate-50/60 p-4 shadow-[0_15px_50px_rgba(15,23,42,0.08)]">
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">{detail.beforeAfter.before.label}</p>
-                  <img
-                    src={detail.beforeAfter.before.image}
-                    alt={detail.beforeAfter.before.label}
-                    className="h-64 w-full rounded-2xl object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="space-y-3 rounded-3xl border border-slate-100 bg-slate-50/60 p-4 shadow-[0_15px_50px_rgba(15,23,42,0.08)]">
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">{detail.beforeAfter.after.label}</p>
-                  <img
-                    src={detail.beforeAfter.after.image}
-                    alt={detail.beforeAfter.after.label}
-                    className="h-64 w-full rounded-2xl object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        <section className="bg-white py-16">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#384B70]">Öne Çıkan Avantajlar</p>
-              <h2 className="mt-2 font-heading text-3xl text-slate-900">Tedavi yaklaşımımızın güçlü yönleri</h2>
-            </div>
-            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-              {detail.advantages.map((advantage) => (
-                <div
-                  key={advantage.title}
-                  className="rounded-2xl border border-slate-100 bg-white/90 p-6 text-center shadow-[0_20px_60px_rgba(15,23,42,0.08)]"
-                >
-                  <span className="text-3xl">{advantage.icon}</span>
-                  <h3 className="mt-4 text-lg font-semibold text-slate-900">{advantage.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{advantage.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-gradient-to-b from-white to-slate-50 py-16">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#384B70]">Tedavi Süreci</p>
-              <h2 className="mt-2 font-heading text-3xl text-slate-900">Adım adım premium protokol</h2>
-            </div>
-            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-              {detail.steps.map((step, index) => (
-                <div
-                  key={step.title}
-                  className="flex flex-col rounded-3xl border border-white/70 bg-white/95 p-6 shadow-[0_20px_60px_rgba(15,23,42,0.08)]"
-                >
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-[#F5EFE6] text-sm font-semibold text-[#384B70]">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-4 text-lg font-semibold text-slate-900">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{step.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-white py-16">
-          <div className="mx-auto max-w-6xl rounded-[32px] border border-slate-100 bg-[#F8F4EF] px-6 py-10 shadow-[0_25px_80px_rgba(15,23,42,0.12)] sm:px-12">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-[1.2fr_0.8fr] md:items-center">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#7a674e]">Randevu</p>
-                <h2 className="mt-3 font-heading text-3xl text-slate-900">Uzman ekibimiz sizi dinlemeye hazır</h2>
-                <p className="mt-3 text-base leading-relaxed text-slate-600">
-                  Tedavi planınızı yüz yüze görüşmek, maliyet ve süre hakkında bilgi almak için hemen iletişim formunu doldurabilir
-                  veya WhatsApp üzerinden mesaj gönderebilirsiniz.
-                </p>
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex flex-1 items-center justify-center rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white shadow-[0_15px_45px_rgba(16,185,129,0.35)] transition hover:bg-emerald-500"
-                >
-                  WhatsApp&apos;tan Yazın
-                </a>
-                <Link
-                  href="/iletisim#fast-appointment"
-                  className="inline-flex flex-1 items-center justify-center rounded-full border border-[#384B70] px-6 py-3 text-sm font-semibold text-[#384B70] transition hover:bg-white"
-                >
-                  Formu Doldurun
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div className="mx-auto mb-10 w-full max-w-6xl border-t border-slate-200" />
-        <Footer />
       </main>
+      <Footer />
     </>
   );
 };

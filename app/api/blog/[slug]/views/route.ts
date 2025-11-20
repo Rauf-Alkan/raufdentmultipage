@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
-export async function POST(_: NextRequest, { params }: { params: { slug: string } }) {
+type RouteContext = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
+export async function POST(_: NextRequest, context: RouteContext) {
   try {
-    const { slug } = params;
+    const { slug } = await context.params;
     const updated = await prisma.blogPost.update({
       where: { slug },
       data: {
