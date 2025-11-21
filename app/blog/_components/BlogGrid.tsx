@@ -109,33 +109,33 @@ const BlogGrid = ({ blogs }: BlogGridProps) => {
       </section>
 
       <section className="-mt-10 rounded-[36px] border border-slate-100 bg-white p-6 shadow-[0_20px_80px_rgba(15,23,42,0.12)] sm:p-12">
-        <div className="grid grid-cols-1 gap-12">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
           {filteredBlogs.length === 0 ? (
             <div className="col-span-full rounded-2xl border border-dashed border-slate-200 bg-white/60 p-10 text-center text-slate-500">
               Aramanızla eşleşen sonuç bulunamadı.
             </div>
           ) : (
-            filteredBlogs.map((blog, index) => (
+            filteredBlogs.map((blog) => (
               <article
                 key={blog.slug}
-                className={`group flex h-full flex-col overflow-hidden rounded-[36px] border border-slate-100 bg-white shadow-[0_40px_120px_rgba(15,23,42,0.08)] transition hover:-translate-y-1.5 hover:shadow-[0_45px_160px_rgba(15,23,42,0.15)] ${index % 2 === 1 ? "lg:flex-row-reverse" : "sm:flex-row"}`}
+                className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-slate-100 bg-white shadow-[0_30px_110px_rgba(15,23,42,0.1)] transition hover:-translate-y-1 hover:shadow-[0_36px_140px_rgba(15,23,42,0.16)]"
               >
-                <div className="relative h-80 w-full overflow-hidden sm:h-auto sm:w-1/2">
+                <div className="relative h-56 w-full overflow-hidden">
                   <Image
                     src={blog.coverImage || "/hero.webp"}
                     alt={blog.title}
                     fill
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <span className="absolute left-4 top-4 inline-flex items-center rounded-full bg-white/95 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#384B70] shadow">
                     {formatDate(blog.publishedAt)}
                   </span>
                 </div>
-                <div className="flex flex-1 flex-col items-center p-10 text-center">
-                  <h2 className="text-2xl font-semibold text-slate-900 leading-snug">{blog.title}</h2>
-                  <p className="mt-5 flex-1 text-base leading-relaxed text-slate-600 line-clamp-4">{blog.summary}</p>
-                  <div className="mt-8 flex w-full flex-wrap items-center justify-between gap-4 text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
+                <div className="flex flex-1 flex-col p-8">
+                  <h2 className="text-xl font-semibold text-slate-900 leading-snug">{blog.title}</h2>
+                  <p className="mt-4 flex-1 text-base leading-relaxed text-slate-600 line-clamp-4">{blog.summary}</p>
+                  <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
                     <span className="inline-flex items-center gap-2 text-slate-500">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -160,13 +160,15 @@ const BlogGrid = ({ blogs }: BlogGridProps) => {
                     </span>
                     <span className="text-slate-500">{blog.readTime || 2} dk</span>
                   </div>
-                  <Link
-                    href={`/blog/${blog.slug}`}
-                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#384B70] transition group-hover:gap-3"
-                  >
-                    Devamını Oku
-                    <span aria-hidden="true">→</span>
-                  </Link>
+                  <div className="mt-6">
+                    <Link
+                      href={`/blog/${blog.slug}`}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#384B70] transition group-hover:gap-3"
+                    >
+                      Devamını Oku
+                      <span aria-hidden="true">→</span>
+                    </Link>
+                  </div>
                 </div>
               </article>
             ))
