@@ -16,6 +16,17 @@ type BlogPageProps = {
   };
 };
 
+const getBlogBySlug = async (slug: string) => {
+  try {
+    return await prisma.blogPost.findUnique({
+      where: { slug },
+    });
+  } catch (error) {
+    console.error("Blog fetch failed", error);
+    return null;
+  }
+};
+
 const formatDate = (dateInput: string | Date) => {
   try {
     return new Intl.DateTimeFormat("tr-TR", {
@@ -31,9 +42,7 @@ const formatDate = (dateInput: string | Date) => {
 export const dynamic = "force-dynamic";
 
 export const generateMetadata = async ({ params }: BlogPageProps): Promise<Metadata> => {
-  const blog = await prisma.blogPost.findUnique({
-    where: { slug: params.slug },
-  });
+  const blog = await getBlogBySlug(params.slug);
 
   if (!blog) {
     return {
@@ -60,9 +69,7 @@ export const generateMetadata = async ({ params }: BlogPageProps): Promise<Metad
 };
 
 const BlogDetailPage = async ({ params }: BlogPageProps) => {
-  const blog = await prisma.blogPost.findUnique({
-    where: { slug: params.slug },
-  });
+  const blog = await getBlogBySlug(params.slug);
 
   if (!blog) {
     notFound();

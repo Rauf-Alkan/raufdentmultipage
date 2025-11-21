@@ -1,7 +1,16 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
+import {
+  LuAlignHorizontalJustifyCenter,
+  LuBone,
+  LuLayers,
+  LuSmile,
+  LuSparkles,
+  LuStethoscope,
+} from "react-icons/lu";
 
 export type Service = {
-  icon: string;
+  icon: ReactNode;
   title: string;
   tagline: string;
   description: string;
@@ -12,66 +21,66 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    icon: "🦷",
+    icon: <LuBone className="h-7 w-7" />,
     title: "İmplant Tedavisi",
     tagline: "Doğal görünüm ve uzun ömürlü çözüm",
     description:
-      "Eksik dişlerinizi dijital planlama ve kişiye özel implantlarla tamamlıyoruz. Konforlu klinik ortamı ve hassas cerrahi tekniklerle iyileşme sürecinizin her adımını takip ediyoruz.",
+      "Eksik dişleri dijital planlama ve hassas cerrahiyle konforlu implantlarla tamamlıyoruz.",
     detail: "Dijital planlama ve yüksek başarı oranıyla konforlu implant uygulamaları sunuyoruz.",
     detailedDescription:
       "Eksik dişlerinizi doğal görünümde ve fonksiyonel implant çözümleriyle tamamlıyoruz. Her tedavi öncesi ayrıntılı muayene ve dijital planlama sayesinde sürecin her adımını şeffaf şekilde paylaşıyor, uzman hekimlerimizle kişiye özel planlar hazırlıyoruz. Konforlu klinik ortamımızda iyileşme sürecini yakından takip ederek hem estetik hem fonksiyonel sonuçlar sağlıyoruz.",
     slug: "implant",
   },
   {
-    icon: "💎",
+    icon: <LuSmile className="h-7 w-7" />,
     title: "Gülüş Tasarımı",
     tagline: "Simetrik ve estetik bir gülüş",
     description:
-      "Dijital gülüş tasarımı seanslarında yüz hatlarınıza ve beklentilerinize göre lamina, bonding ve porselen işlemlerini planlıyor; tedavi öncesi-sonrası tüm seçenekleri birlikte inceliyoruz.",
+      "Yüz hatlarınıza uygun dijital gülüş tasarımıyla lamina, bonding ve porselen seçeneklerini birlikte planlıyoruz.",
     detail: "Mock-up ve prova süreçleriyle tasarımı ağızda deneyimleyip onayınızla ilerliyoruz.",
     detailedDescription:
       "Lamina, zirkonyum ve bonding uygulamalarıyla gülüşünüzü yeniden tasarlıyoruz. Bilim ve sanatı bir araya getiren yaklaşımımızla estetik beklentilerinizi fonksiyonel ihtiyaçlarınızla dengeliyor, kişiye özel tasarımlar hazırlıyoruz. Dijital görüntüleme sistemleriyle tedavi sonrasını önceden görmenize imkan tanıyor, uzun ömürlü materyaller kullanıyoruz.",
     slug: "gulus-tasarimi",
   },
   {
-    icon: "✨",
+    icon: <LuSparkles className="h-7 w-7" />,
     title: "Diş Beyazlatma",
     tagline: "30 dakikalık ofis tipi işlem",
     description:
-      "Ofis tipi veya ev tipi profesyonel beyazlatma yöntemleriyle doğal tonunuza uyumlu, eşit parlaklıkta bir gülüş sağlıyoruz. Hassasiyet riskini azaltmak için özel protokoller uyguluyoruz.",
+      "Ofis tipi veya ev tipi profesyonel beyazlatmayla doğal tona uyumlu, eşit parlaklık sağlıyoruz.",
     detail: "Ofis tipi LED destekli uygulamayı ev tipi kitlerle destekleyerek tonu koruyoruz.",
     detailedDescription:
       "Ofis tipi veya ev tipi profesyonel beyazlatma yöntemleriyle daha beyaz ve estetik bir gülüş sunuyoruz. Modern ölçü teknikleri ve ileri tedavi yöntemleri sayesinde süreci hızlandırıyor, kullanılan ajanları kişiye özel seçiyoruz. Her adımda sakin ve anlaşılır bir iletişim sürdürerek işlem sonrası bakım önerilerini de sizinle paylaşıyoruz.",
     slug: "dis-beyazlatma",
   },
   {
-    icon: "🪥",
+    icon: <LuAlignHorizontalJustifyCenter className="h-7 w-7" />,
     title: "Ortodonti (Diş Teli / Şeffaf Plak)",
     tagline: "Görünmez plaklarla konforlu hizalama",
     description:
-      "Geleneksel diş telleri veya görünmez plaklarla çapraşıklıkları düzeltiyoruz. Dijital ölçümler ve düzenli kontrollerle süreci ayrıntılı şekilde takip ediyoruz.",
+      "Geleneksel teller veya görünmez plaklarla çapraşıklıkları dijital ölçüm ve düzenli kontrollerle düzeltiyoruz.",
     detail: "3D tarama, simülasyon ve sıkı retainer takibiyle kalıcı hizalama sağlıyoruz.",
     detailedDescription:
       "Geleneksel diş telleri veya görünmez plaklarla çapraşıklıkları düzeltiyoruz. Dijital planlama ve uzman hekimlerimizin yakın takibi sayesinde her yaştaki hastamız için konforlu, öngörülebilir bir ortodonti süreci yürütüyoruz. Kontrollerde ağız hijyenini ve tedavi disiplinini korumak için rehberlik sağlıyoruz.",
     slug: "ortodonti",
   },
   {
-    icon: "💠",
+    icon: <LuLayers className="h-7 w-7" />,
     title: "Zirkonyum / Porselen Kaplama",
     tagline: "Doğala en yakın estetik restorasyon",
     description:
-      "Zirkonyum ve porselen kaplamalarla dişlerinizi güçlendirirken doğal ışık geçirgenliğini koruyoruz. Dijital ölçüyle uyumlu ve uzun ömürlü restorasyonlar üretiyoruz.",
+      "Zirkonyum ve porselen kaplamalarla dişlerinizi güçlendirip doğal ışık geçirgenliğini koruyoruz.",
     detail: "Geçici kaplamalarla prova yapıp kalıcı kaplamaları kişiye özel renkte teslim ediyoruz.",
     detailedDescription:
       "Dayanıklı materyaller ve dijital ölçü teknikleriyle gülüşünüzle uyumlu zirkonyum ve porselen kaplamalar hazırlıyoruz. Her kaplama için diş etiniz ve çiğneme yapınız dikkate alınarak ince işçilikle uygulama yapıyoruz.",
     slug: "zirkonyum-kaplama",
   },
   {
-    icon: "🩺",
+    icon: <LuStethoscope className="h-7 w-7" />,
     title: "Dolgu & Kanal Tedavisi",
     tagline: "Ağrısız ve hızlı onarım",
     description:
-      "Çürük ve enfekte dişleri hassas anestezi teknikleriyle ağrısız şekilde tedavi ediyor, modern dolgu materyalleriyle uzun ömürlü çözümler sağlıyoruz.",
+      "Çürük ve enfekte dişleri hassas anesteziyle ağrısız tedavi edip modern dolgularla güçlendiriyoruz.",
     detail: "Mikroskobik kanal temizliği ve nano hibrit dolgularla dişinizi çekimden koruyoruz.",
     detailedDescription:
       "Enfekte olmuş dişleri modern tekniklerle tedavi ederek ağrıyı kalıcı olarak gideriyoruz. İleri teknoloji cihazlarımız ve şeffaf süreç yönetimimiz sayesinde tedavi boyunca ne yapılacağını adım adım paylaşıyoruz. Konforlu ortam ve hassas anestezi teknikleriyle işlem sırasında rahat etmenizi sağlıyoruz.",

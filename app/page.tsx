@@ -5,6 +5,7 @@ import Header from "@/components/sections/Header";
 import HeroSlider from "@/components/hero/HeroSlider";
 import PatientTestimonials from "@/components/sections/PatientTestimonials";
 import Footer from "@/components/sections/Footer";
+import AppointmentForm from "@/components/forms/AppointmentForm";
 import { services } from "@/components/sections/Services";
 import { teamMembers } from "@/components/sections/Team";
 import { prisma } from "@/lib/db";
@@ -85,7 +86,7 @@ const Home = async () => {
           </div>
         </section>
 
-        <section className="bg-gradient-to-b from-white via-slate-50 to-white py-24">
+        <section className="bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">Blog &amp; Makaleler</p>
@@ -149,7 +150,7 @@ const Home = async () => {
 
         <PatientTestimonials />
 
-        <section className="bg-gradient-to-b from-white to-slate-50 py-24">
+        <section className="bg-gradient-to-b from-white via-[#F6F7FB] to-white py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-14 text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">Ekibimiz</p>
@@ -192,33 +193,34 @@ const Home = async () => {
           </div>
         </section>
 
-        <section className="bg-white py-24">
-          <div className="mx-auto max-w-6xl rounded-[32px] border border-slate-100 bg-gradient-to-br from-white via-[#F8F4EF] to-white p-10 text-center shadow-[0_30px_80px_rgba(15,23,42,0.12)]">
-            <p className="inline-flex items-center rounded-full bg-[#F3EBDF] px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-[#384B70]">
-              Hızlı Randevu
-            </p>
-            <h2 className="mt-6 font-heading text-3xl tracking-tight text-slate-900 md:text-4xl">
-              İlk ziyareti planlayın, ekibimiz hemen sizi arasın.
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-slate-600">
-              Premium kliniğimizde randevu almak için iletişim sayfamızdaki formu kullanın. Tüm talepleri dakikalar içinde yanıtlıyor ve size en uygun zamanı birlikte belirliyoruz.
-            </p>
-            <div className="mt-8 space-y-4">
-              <a
-                className="block text-3xl font-semibold text-slate-900 transition hover:text-[#384B70]"
-                href="tel:+905455555050"
-              >
-                +90 545 555 50 50
-              </a>
-              <p className="text-sm uppercase tracking-[0.2em] text-slate-500">Hafta içi 09:00 – 20:00</p>
-              <div className="mt-6 flex items-center justify-center">
-                <Link
-                  href="/iletisim"
-                  className="inline-flex items-center justify-center rounded-full border border-[#384B70] bg-[#384B70] px-7 py-3.5 font-semibold text-white transition hover:bg-opacity-90"
-                >
-                  Randevu Talep Formunu Aç
-                </Link>
+        <section className="bg-gradient-to-b from-[#F8FAFC] via-white to-[#F7F7F9] py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
+              
+              {/* SOL KOLON: HARİTA */}
+              <div className="relative flex h-full min-h-[360px] w-full overflow-hidden rounded-[32px] border border-neutral-200 bg-white shadow-[0_25px_80px_rgba(15,23,42,0.08)] md:order-1">
+                <iframe
+                  title="Klinik Konumu"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3064.452211571933!2d32.852980676336005!3d39.920915483507386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d34f836b4cd7b7%3A0xbc8a761c0a0ce873!2sAtat%C3%BCrk%20Bulvar%C4%B1%2C%20K%C4%B1z%C4%B1lay%2C%20%C3%87ankaya%2FAnkara!5e0!3m2!1str!2str!4v1714944912345!5m2!1str!2str"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 h-full w-full"
+                />
               </div>
+
+              {/* SAĞ KOLON: İletişim Formu (Contact form ile aynı) */}
+              <div className="flex h-full flex-col rounded-[32px] border border-neutral-200 bg-white p-8 shadow-[0_25px_80px_rgba(15,23,42,0.08)] md:order-2">
+                <h3 className="text-2xl font-semibold text-neutral-900">Bize Ulaşın</h3>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-600">
+                  Formu doldurun, hafta içi ortalama 30 dakika içinde size dönüş yapalım. Dilerseniz WhatsApp üzerinden de yazabilirsiniz.
+                </p>
+                <AppointmentForm withFrame wrapperClassName="mt-6" />
+              </div>
+
             </div>
           </div>
         </section>

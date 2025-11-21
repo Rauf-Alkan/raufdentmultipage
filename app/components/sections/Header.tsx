@@ -50,7 +50,7 @@ const Header = () => {
             className="h-10 w-10 object-contain opacity-95"
             priority
           />
-          <span className="font-heading tracking-tight">Rauf Alkan Diş Kliniği</span>
+          <span className="font-heading tracking-tight">Dt. Rauf Alkan</span>
         </Link>
 
         <nav className="ml-auto hidden flex-1 items-center justify-end gap-8 text-sm font-semibold text-slate-600 lg:flex">

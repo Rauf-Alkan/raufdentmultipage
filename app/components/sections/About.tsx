@@ -1,157 +1,105 @@
+// sections/About.tsx
 import Link from "next/link";
-
-const whatsappUrl = "https://wa.me/905455555050?text=Merhaba%2C%20randevu%20almak%20istiyorum.";
+import { LuCpu, LuDiamond, LuHandshake, LuUsers } from "react-icons/lu";
 
 export const aboutContent = {
-  eyebrow: "Hakkımızda",
-  title: "Ankara Kızılay'da premium diş hekimliği deneyimi",
-  subtitle: "Estetik, fonksiyon ve konforu bir araya getiren modern tedavi yaklaşımı.",
-  description:
-    "İleri teknolojiyi, estetik hedefleri ve hasta konforunu aynı çatı altında buluşturuyoruz. Dijital planlama ile başlayan süreçlerimizi şeffaf şekilde yönetiyor, implant, estetik diş hekimliği ve ortodonti alanlarında uzman ekibimizle kişiye özel çözümler sunuyoruz.",
-  clinicTitle: "Kliniğimize Hoş Geldiniz",
-  clinicSubtitle: "Modern klinik ortamı ve kişiye özel tedavi planlaması",
-  clinicDescription:
-    "Ağız ve diş sağlığında modern teknolojiyi, estetik hedefleri ve hasta konforunu bir araya getiriyoruz. Her tedavi adımını dijital planlama ile başlatıyor, süreç boyunca şeffaf ve anlaşılır rehberlik sunuyoruz.",
-  bullets: [
-    "Her tedavi öncesi ayrıntılı muayene ve dijital planlama",
-    "Uzman hekimlerle implant, estetik ve ortodonti çözümleri",
-    "Konforlu klinik ortamı ve şeffaf süreç yönetimi",
-  ],
+  eyebrow: "HAKKIMIZDA",
+  title: "Sağlıklı ve Estetik Gülüşler İçin Buradayız",
+  description: "Ankara Kızılay'da bulunan kliniğimiz, modern diş hekimliğinin tüm imkanlarını kullanarak, estetik ve fonksiyonu bir araya getiren kişiye özel tedavi planları sunmaktadır. Hedefimiz; size sadece bir tedavi değil, konforlu ve güven dolu bir deneyim yaşatmaktır.",
   image: {
-    src: "/about.webp",
-    alt: "Rauf Dent kliniği",
+    src: "/about-apple-style.webp",
+    alt: "Rauf Dent Klinik",
   },
-  doctor: {
-    name: "Dt. Rauf Alkan",
-    title: "Diş Hekimi & Klinik Sorumlusu",
-    quote: "Estetik, fonksiyon ve konforu bir araya getiren modern tedavi yaklaşımını benimsiyorum.",
-    highlights: [
-      "Ankara Üniversitesi Diş Hekimliği mezunu",
-      "15+ yıl klinik deneyimi",
-      "Dijital planlama & implant odaklı çalışma",
-      "180+ Google yorumu, yüksek memnuniyet",
-    ],
-  },
-  advantages: [
+  features: [
     {
-      icon: "⭐",
-      title: "Kişiye özel planlama",
-      description: "Her hastanın ağız yapısı ve beklentisine özel dijital planlama yapıyoruz.",
+      icon: <LuDiamond className="h-7 w-7" />,
+      title: "Premium Materyal",
+      desc: "Dünya standartlarında sertifikalı ürünler.",
     },
     {
-      icon: "⚙️",
-      title: "Son teknoloji donanım",
-      description: "Dijital röntgen, intraoral kamera ve mikromotor sistemlerle hassas çalışıyoruz.",
+      icon: <LuCpu className="h-7 w-7" />,
+      title: "Modern Teknoloji",
+      desc: "Dijital ölçü ve 3D görüntüleme sistemleri.",
     },
     {
-      icon: "🤝",
-      title: "Şeffaf ve konforlu süreç",
-      description: "Her adımı önceden anlatıyor, sürpriz maliyetleri ortadan kaldırıyoruz.",
+      icon: <LuUsers className="h-7 w-7" />,
+      title: "Uzman Hekim Kadrosu",
+      desc: "Deneyimli ve sürekli gelişen ekip.",
     },
+    {
+      icon: <LuHandshake className="h-7 w-7" />,
+      title: "Hasta Memnuniyeti",
+      desc: "Şeffaf süreç ve konforlu deneyim.",
+    }
   ],
   cta: {
-    primaryLabel: "WhatsApp'tan Randevu Al",
-    secondaryLabel: "Kliniği Ziyaret Et",
-    secondaryHref: "/iletisim#contact",
-  },
+    primary: "Randevu Oluştur",
+    secondary: "Hizmetlerimizi İncele"
+  }
 };
 
 const About = () => {
   return (
-    <section
-      id="about"
-      className="bg-gradient-to-b from-white to-slate-50 py-28 md:py-36"
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">{aboutContent.eyebrow}</p>
-          <h2 className="mt-2 font-heading text-3xl tracking-tight text-[#1f2937] md:text-5xl">{aboutContent.title}</h2>
-          <p className="mt-3 text-lg text-slate-600">{aboutContent.subtitle}</p>
-        </div>
-
-        <div className="mt-16 grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="rounded-[32px] border border-white/70 bg-white/90 p-8 shadow-[0_35px_100px_rgba(15,23,42,0.12)]">
-            <div className="grid gap-6 md:grid-cols-[0.8fr_1.2fr]">
-              <img
-                src="/doctor.webp"
-                alt={aboutContent.doctor.name}
-                className="h-48 w-full rounded-3xl object-cover shadow-[0_15px_35px_rgba(15,23,42,0.15)]"
-                loading="lazy"
-              />
-              <div>
-                <p className="text-lg font-semibold text-slate-900">{aboutContent.doctor.name}</p>
-                <p className="text-sm text-slate-500">{aboutContent.doctor.title}</p>
-                <p className="mt-4 text-base italic text-slate-600">“{aboutContent.doctor.quote}”</p>
-                <ul className="mt-5 space-y-2 text-sm text-slate-600">
-                  {aboutContent.doctor.highlights.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-center gap-2"
-                    >
-                      <span className="h-2 w-2 rounded-full bg-[#D7C3A3]" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+    <section id="about" className="bg-white py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* GÖRSEL */}
+          <div className="order-2 lg:order-1">
+            <div className="relative overflow-hidden rounded-3xl shadow-[0_20px_50px_rgba(15,23,42,0.05)] bg-slate-50 h-[350px] lg:h-[420px] w-full border border-slate-100">
+               <img 
+                 src={aboutContent.image.src} 
+                 alt={aboutContent.image.alt} 
+                 className="h-full w-full object-cover"
+               />
             </div>
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {aboutContent.advantages.map((advantage) => (
-              <div
-                key={advantage.title}
-                className="rounded-2xl border border-slate-100 bg-white/90 p-6 text-center shadow-[0_20px_60px_rgba(15,23,42,0.08)]"
-              >
-                <span className="text-3xl">{advantage.icon}</span>
-                <h3 className="mt-4 text-lg font-semibold text-slate-900">{advantage.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">{advantage.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        <div className="mt-16 grid grid-cols-1 items-center gap-16 md:grid-cols-2">
-          <div className="space-y-6">
-            <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">{aboutContent.clinicTitle}</p>
-            <h3 className="text-2xl font-semibold text-slate-900">{aboutContent.clinicSubtitle}</h3>
-            <p className="text-lg leading-relaxed text-slate-600">{aboutContent.clinicDescription}</p>
-            <ul className="space-y-2 text-base text-slate-600">
-              {aboutContent.bullets.map((bullet) => (
-                <li
-                  key={bullet}
-                  className="flex items-center gap-2"
-                >
-                  <span className="h-2 w-2 rounded-full bg-[#D7C3A3]" />
-                  {bullet}
-                </li>
+          {/* İÇERİK */}
+          <div className="order-1 lg:order-2">
+            {/* Eyebrow: Services stili */}
+            <span className="mb-6 block text-xs font-semibold uppercase tracking-[0.4em] text-[#384B70]">
+              {aboutContent.eyebrow}
+            </span>
+
+            {/* Başlık: font-heading ve slate-900 */}
+            <h2 className="mb-6 font-heading text-3xl tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+              {aboutContent.title}
+            </h2>
+
+            <p className="mb-12 text-lg leading-relaxed text-slate-600">
+              {aboutContent.description}
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 mb-12">
+              {aboutContent.features.map((feature, index) => (
+                <div key={index} className="flex flex-col gap-2">
+                   {/* İkon Rengi: #384B70 */}
+                   <span className="mb-1 text-2xl text-[#384B70] drop-shadow-sm">{feature.icon}</span>
+                   <div>
+                      <h3 className="text-base font-semibold text-slate-900">{feature.title}</h3>
+                      <p className="mt-1 text-sm leading-normal text-slate-500">{feature.desc}</p>
+                   </div>
+                </div>
               ))}
-            </ul>
-          </div>
-          <div>
-            <img
-              src={aboutContent.image.src}
-              alt={aboutContent.image.alt}
-              className="h-full w-full rounded-3xl object-cover shadow-[0_40px_90px_rgba(15,23,42,0.12)]"
-              loading="lazy"
-            />
-          </div>
-        </div>
+            </div>
 
-        <div className="mt-16 flex flex-wrap justify-center gap-3 md:justify-start">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full border border-[#384B70] bg-[#384B70] px-7 py-3.5 font-semibold text-white transition hover:bg-opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7C3A3]"
-          >
-            {aboutContent.cta.primaryLabel}
-          </a>
-          <Link
-            href={aboutContent.cta.secondaryHref}
-            className="inline-flex items-center justify-center rounded-full border border-[#D7C3A3] px-7 py-3.5 font-semibold text-[#384B70] transition hover:bg-[#F8F4EF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D7C3A3]"
-          >
-            {aboutContent.cta.secondaryLabel}
-          </Link>
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="#"
+                className="rounded-full bg-[#384B70] px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-[#2a3a5a] shadow-[0_10px_20px_rgba(56,75,112,0.2)]"
+              >
+                {aboutContent.cta.primary}
+              </a>
+              <Link
+                href="/hizmetler"
+                className="rounded-full border border-slate-200 px-8 py-3.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 hover:border-slate-300"
+              >
+                {aboutContent.cta.secondary}
+              </Link>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

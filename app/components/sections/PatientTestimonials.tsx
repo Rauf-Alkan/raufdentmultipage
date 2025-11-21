@@ -77,7 +77,7 @@ const PatientTestimonials = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b from-white via-[#F8F4EF]/40 to-white py-24">
+    <section className="bg-gradient-to-b from-[#FFF7EF] via-white to-[#FFF7EF] py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.45em] text-[#384B70]">HASTA YORUMLARI</p>

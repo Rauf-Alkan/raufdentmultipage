@@ -1,88 +1,99 @@
+// sections/Team.tsx
+import Link from "next/link";
+
 export const teamMembers = [
   {
     name: "Uzm. Dt. Ali Yılmaz",
     title: "İmplant ve Cerrahi",
     photo: "/doctor1.webp",
-    badge: "Dijital Implant Cerrahisi",
     summary:
-      "Uludağ Üniversitesi Diş Hekimliği Fakültesi’nden 2008’de mezun oldu. İleri implantoloji ve rehberli cerrahi üzerine eğitimler alarak dijital planlama protokollerini kliniğe taşıdı. Minimal invaziv uygulamalarla doğal görünümlü sonuçlara odaklanıyor.",
-    highlights: ["12+ yıl implant deneyimi", "3D rehberli cerrahi", "4.9 hasta memnuniyeti"],
+      "Uludağ Üniversitesi Diş Hekimliği Fakültesi’nden mezun olan Dt. Ali, ileri implantoloji ve rehberli cerrahi üzerine uzmanlaşmıştır. Dijital planlama ve minimal invaziv tekniklere odaklanarak hastalarına en konforlu tedavi süreçlerini sunar.",
   },
   {
     name: "Uzm. Dt. Ayşe Demir",
     title: "Estetik Diş Hekimi",
     photo: "/doctor2.webp",
-    badge: "Gülüş Tasarımı",
     summary:
-      "Hacettepe Üniversitesi mezunu olan Dt. Ayşe, estetik restorasyonlar ve gülüş tasarımında 10 yılı aşkın süredir çalışıyor. Dijital mock-up ve kişiye özel renk planlama teknikleriyle doğala en yakın sonuçları hedefliyor.",
-    highlights: ["5.000+ gülüş tasarımı", "CAD/CAM lamina uzmanı", "Kişiye özel renk planlama"],
+      "Hacettepe Üniversitesi mezunu olan Dt. Ayşe, estetik restorasyonlar ve gülüş tasarımında 10 yılı aşkın deneyime sahiptir. Dijital mock-up ve kişiye özel renk planlama teknikleriyle doğala en yakın sonuçları hedefler.",
   },
   {
     name: "Uzm. Dt. Emre Akman",
     title: "Ortodonti ve Pedodonti",
     photo: "/doctor3.webp",
-    badge: "Şeffaf Plak & Pedodonti",
     summary:
-      "Ankara Üniversitesi mezunu Dt. Emre, uzmanlığını ortodonti ve pedodonti alanında tamamladı. Şeffaf plak tedavilerini dijital ölçülerle planlıyor, aynı zamanda çocuk hastalarda davranış odaklı yaklaşımıyla tanınıyor.",
-    highlights: ["Invisalign sertifikalı", "Pedodonti deneyimi", "Davranış odaklı iletişim"],
+      "Ankara Üniversitesi mezunu Dt. Emre, şeffaf plak tedavilerini dijital ölçülerle planlar. Özellikle çocuk hastalarda davranış odaklı yaklaşımı ve koruyucu hekimlik uygulamalarıyla tanınır.",
   },
 ];
 
 const Team = () => {
   return (
-    <section
-      id="team"
-      className="bg-gradient-to-b from-white to-slate-50 py-28 md:py-36"
-    >
+    <section id="team" className="bg-white py-24 md:py-32 border-t border-neutral-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#384B70]">Ekibimiz</p>
-          <h2 className="mt-3 font-heading text-3xl tracking-tight text-slate-900 md:text-5xl">Alanında uzman hekimlerimizle tanışın</h2>
-          <p className="mt-4 text-base leading-relaxed text-slate-600">
-            Dijital planlama, modern klinik altyapısı ve hasta konforuna odaklanan yaklaşımımızla her tedavide deneyimli ekibimiz yanınızda.
+        
+        {/* HEADER */}
+        <div className="text-center space-y-4 md:space-y-5 mb-12">
+          <p className="text-xs font-semibold uppercase tracking-[0.4em] text-[#384B70]">
+            EKİBİMİZ
+          </p>
+          <h2 className="font-heading text-3xl tracking-tight text-slate-900 md:text-4xl md:leading-relaxed">
+            Alanında uzman hekimlerimizle tanışın
+          </h2>
+          <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-600 md:leading-loose">
+            Modern klinik altyapımızı deneyimli hekimlerimizle birleştirerek her hastamıza kişiye özel, şeffaf ve güvenilir çözümler sunuyoruz.
           </p>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+        {/* GRID YAPISI */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {teamMembers.map((doctor) => (
             <article
               key={doctor.name}
-              className="flex h-full flex-col rounded-[32px] border border-slate-100 bg-white p-6 shadow-[0_25px_70px_rgba(15,23,42,0.1)] transition hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.12)]"
+              // DÜZELTME 1: Kart Yapısı (Border + Bg + Shadow)
+              // Artık 'blok' değil, net bir 'kart' görünümünde.
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
             >
-              <div className="relative mb-5">
+              {/* FOTOĞRAF ALANI */}
+              <div className="mb-6 overflow-hidden rounded-xl bg-neutral-100 shadow-inner">
                 <img
                   src={doctor.photo}
                   alt={doctor.name}
-                  className="aspect-[3/4] w-full rounded-[28px] object-cover shadow-[0_20px_60px_rgba(15,23,42,0.2)]"
+                  className="aspect-[4/5] w-full object-cover object-top transition duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
-                {doctor.badge ? (
-                  <span className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/90 px-4 py-1 text-xs font-semibold text-[#384B70] shadow-[0_10px_30px_rgba(15,23,42,0.15)]">
-                    {doctor.badge}
-                  </span>
-                ) : null}
               </div>
-              <div className="flex flex-col flex-1">
-                <div>
-                  <h3 className="text-2xl font-semibold text-slate-900">{doctor.name}</h3>
-                  <p className="mt-1 text-sm text-slate-500">{doctor.title}</p>
+
+              {/* İÇERİK ALANI */}
+              <div className="flex flex-1 flex-col">
+                <h3 className="text-xl font-semibold text-neutral-900">
+                  {doctor.name}
+                </h3>
+                
+                <p className="mt-1 text-sm font-medium text-[#384B70]">
+                  {doctor.title}
+                </p>
+                
+                <p className="mt-4 text-sm leading-relaxed text-neutral-600">
+                  {doctor.summary}
+                </p>
+              </div>
+
+              {/* DÜZELTME 2 & 3: "Hekim" silindi, CTA Hizalandı */}
+              {/* mt-auto sayesinde içerik kısa da olsa buton hep en altta hizalı kalır */}
+              <div className="mt-auto pt-6">
+                <div className="border-t border-neutral-100 pt-4">
+                  <Link
+                    href="/iletisim"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#384B70] transition-all group-hover:gap-3 group-hover:text-[#D7C3A3]"
+                  >
+                    Randevu Oluştur
+                    <span aria-hidden="true">→</span>
+                  </Link>
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-slate-600">{doctor.summary}</p>
-                <ul className="mt-4 space-y-2 text-sm text-slate-500">
-                  {doctor.highlights.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-center gap-2"
-                    >
-                      <span className="h-2 w-2 rounded-full bg-[#D7C3A3]" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </article>
           ))}
         </div>
+
       </div>
     </section>
   );
