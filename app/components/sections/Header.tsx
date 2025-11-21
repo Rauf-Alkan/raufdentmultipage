@@ -15,8 +15,6 @@ const navLinks = [
   { label: "İletişim", href: "/iletisim" },
 ];
 
-const mobileNavLinks = navLinks.filter((link) => link.href !== "/");
-
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -84,7 +82,7 @@ const Header = () => {
       {menuOpen && (
         <div className="lg:hidden border-t border-slate-100 bg-white">
           <nav className="flex flex-col px-4 pt-3 text-base text-slate-700">
-            {mobileNavLinks.map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
