@@ -214,7 +214,7 @@ const Home = async () => {
 
               {/* SAĞ KOLON: İletişim Formu (Contact form ile aynı) */}
               <div className="flex h-full flex-col rounded-[32px] border border-neutral-200 bg-white p-8 shadow-[0_25px_80px_rgba(15,23,42,0.08)] md:order-2">
-                <h3 className="text-2xl font-semibold text-neutral-900">Bize Ulaşın</h3>
+                <h3 className="text-2xl font-semibold text-neutral-900">Randevu Formu</h3>
                 <p className="mt-2 max-w-2xl text-sm leading-relaxed text-neutral-600">
                   Formu doldurun, hafta içi ortalama 30 dakika içinde size dönüş yapalım. Dilerseniz WhatsApp üzerinden de yazabilirsiniz.
                 </p>

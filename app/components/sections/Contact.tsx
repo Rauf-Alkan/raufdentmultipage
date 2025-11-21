@@ -124,8 +124,8 @@ const Contact = () => {
           </div>
 
           <div className="rounded-[32px] border border-slate-100 bg-white p-8 shadow-[0_25px_80px_rgba(15,23,42,0.08)]">
-            <h3 className="text-xl font-semibold text-[#384B70]">Bize Ulaşın</h3>
-            <p className="mt-2 text-sm text-slate-500">Formu kullanarak mesaj gönderebilir veya hızlıca WhatsApp üzerinden haber verebilirsiniz.</p>
+            <h3 className="text-xl font-semibold text-[#384B70]">Randevu Formu</h3>
+            <p className="mt-2 text-sm text-slate-500">Formu kullanarak randevu talebi oluşturabilir veya hızlıca WhatsApp üzerinden haber verebilirsiniz.</p>
             <AppointmentForm
               withFrame={true}
               wrapperClassName="mt-6"
