@@ -28,7 +28,7 @@ const infoItems = [
   },
   {
     label: "Telefon",
-    value: "+90 555 555 55 55\n+90 850 850 00 00",
+    value: ["+90 555 555 55 55", "+90 850 850 00 00"],
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +116,21 @@ const Contact = () => {
                   <span className="text-[#384B70]">{item.icon}</span>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">{item.label}</p>
-                    <p className="whitespace-pre-line text-sm text-slate-700">{item.value}</p>
+                    {Array.isArray(item.value) ? (
+                      <div className="space-y-1 text-sm text-slate-700">
+                        {item.value.map((phone) => (
+                          <a
+                            key={phone}
+                            href={`tel:${phone.replace(/[^+0-9]/g, "")}`}
+                            className="block text-[#384B70] transition hover:text-[#2F3D61]"
+                          >
+                            {phone}
+                          </a>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="whitespace-pre-line text-sm text-slate-700">{item.value}</p>
+                    )}
                   </div>
                 </div>
               ))}
