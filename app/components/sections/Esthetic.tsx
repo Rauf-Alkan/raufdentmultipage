@@ -5,7 +5,7 @@ export const estheticContent = {
   eyebrow: "ESTETİK YAKLAŞIM",
   title: "Doğallık, Sanatla Buluşuyor",
   description: "Gülüş tasarımı süreçlerimizde yapaylıktan uzak, yüz hatlarınıza en uygun formu arıyoruz. Dijital teknolojiyi sanatsal bir bakış açısıyla harmanlayarak, size en çok yakışan gülüşü tasarlıyoruz.",
-  image: "/esthetic-apple.webp"
+  image: "/esthetic.webp"
 };
 
 const Esthetic = () => {

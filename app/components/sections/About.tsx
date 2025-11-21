@@ -7,7 +7,7 @@ export const aboutContent = {
   title: "Sağlıklı ve Estetik Gülüşler İçin Buradayız",
   description: "Ankara Kızılay'da bulunan kliniğimiz, modern diş hekimliğinin tüm imkanlarını kullanarak, estetik ve fonksiyonu bir araya getiren kişiye özel tedavi planları sunmaktadır. Hedefimiz; size sadece bir tedavi değil, konforlu ve güven dolu bir deneyim yaşatmaktır.",
   image: {
-    src: "/about-apple-style.webp",
+    src: "/service2.webp",
     alt: "Rauf Dent Klinik",
   },
   features: [
