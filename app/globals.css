@@ -5,6 +5,9 @@
   --foreground: #171717;
   --accent-gold: #d7c3a3;
   --accent-navy: #384b70;
+  --font-geist-sans: "Geist", "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-geist-mono: "Geist Mono", "SFMono-Regular", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-playfair: "Playfair Display", "Times New Roman", Times, serif;
 }
 
 @theme inline {

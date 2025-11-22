@@ -1,6 +1,8 @@
 // sections/Team.tsx
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export const teamMembers = [
   {
     name: "Uzm. Dt. Ali Yılmaz",

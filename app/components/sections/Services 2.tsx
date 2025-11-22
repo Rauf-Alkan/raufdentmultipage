@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+export const dynamic = "force-dynamic";
 export type Service = {
   icon: string;
   title: string;

@@ -9,6 +9,8 @@ import {
   LuStethoscope,
 } from "react-icons/lu";
 
+export const dynamic = "force-dynamic";
+
 export type Service = {
   icon: ReactNode;
   title: string;

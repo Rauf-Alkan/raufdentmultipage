@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const footerServices = [
   { label: "İmplant Tedavisi", href: "/hizmetler/implant" },
@@ -12,6 +15,12 @@ const footerServices = [
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const searchParams = useSearchParams();
+  
+  // Dinamik İsim
+  const clinicName = searchParams.get("name") || "Dt. Rauf Alkan";
+  const clinicFullName = searchParams.get("name") ? `${searchParams.get("name")} Kliniği` : "Rauf Alkan Diş Kliniği";
+
   return (
     <footer className="bg-[#F8F4EF] py-16 md:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -20,11 +29,11 @@ const Footer = () => {
             <div className="flex items-center gap-3">
               <img
                 src="/logo.png"
-                alt="Rauf Alkan Diş Kliniği"
+                alt={clinicFullName}
                 className="h-10 w-auto opacity-95"
               />
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#384B70]">Dt. Rauf Alkan</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#384B70]">{clinicFullName}</p>
                 <p className="text-lg font-semibold text-slate-900">Ankara Kızılay</p>
               </div>
             </div>
@@ -170,7 +179,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 border-t border-slate-200 pt-6 text-center text-sm text-slate-500">
-          © {currentYear} Rauf Alkan Diş Kliniği — Tüm hakları saklıdır.
+          © {currentYear} {clinicFullName} — Tüm hakları saklıdır.
         </div>
       </div>
     </footer>

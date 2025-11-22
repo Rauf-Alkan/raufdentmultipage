@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { LuCpu, LuDiamond, LuHandshake, LuUsers } from "react-icons/lu";
 
+export const dynamic = "force-dynamic";
+
 export const aboutContent = {
   eyebrow: "HAKKIMIZDA",
   title: "Sağlıklı ve Estetik Gülüşler İçin Buradayız",

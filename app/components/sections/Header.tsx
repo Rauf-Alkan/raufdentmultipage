@@ -4,6 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 const navLinks = [
@@ -18,10 +19,13 @@ const navLinks = [
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   const closeMenu = () => setMenuOpen(false);
+
+  const clinicName = searchParams.get("name") || "Dt. Rauf Alkan";
 
   const isLinkActive = (href: string) => {
     if (href === "/") {
@@ -42,13 +46,13 @@ const Header = () => {
         >
           <Image
             src="/logo.png"
-            alt="Rauf Alkan Diş Kliniği"
+            alt={clinicName}
             width={40}
             height={40}
             className="h-10 w-10 object-contain opacity-95"
             priority
           />
-          <span className="font-heading tracking-tight">Dt. Rauf Alkan</span>
+          <span className="font-heading tracking-tight">{clinicName}</span>
         </Link>
 
         <nav className="ml-auto hidden flex-1 items-center justify-end gap-8 text-sm font-semibold text-slate-600 lg:flex">

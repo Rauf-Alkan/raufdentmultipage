@@ -1,5 +1,7 @@
 import AppointmentForm from "@/components/forms/AppointmentForm";
 
+export const dynamic = "force-dynamic";
+
 const infoItems = [
   {
     label: "Adres",
