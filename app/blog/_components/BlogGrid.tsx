@@ -116,61 +116,62 @@ const BlogGrid = ({ blogs }: BlogGridProps) => {
             </div>
           ) : (
             filteredBlogs.map((blog) => (
-              <article
+              <Link
                 key={blog.slug}
-                className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-slate-100 bg-white shadow-[0_30px_110px_rgba(15,23,42,0.1)] transition hover:-translate-y-1 hover:shadow-[0_36px_140px_rgba(15,23,42,0.16)]"
+                href={`/blog/${blog.slug}`}
+                className="group block h-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D7C3A3]"
+                aria-label={`${blog.title} yazısını aç`}
               >
-                <div className="relative h-56 w-full overflow-hidden">
-                  <Image
-                    src={blog.coverImage || "/hero.webp"}
-                    alt={blog.title}
-                    fill
-                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <span className="absolute left-4 top-4 inline-flex items-center rounded-full bg-white/95 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#384B70] shadow">
-                    {formatDate(blog.publishedAt)}
-                  </span>
-                </div>
-                <div className="flex flex-1 flex-col p-8">
-                  <h2 className="text-xl font-semibold text-slate-900 leading-snug">{blog.title}</h2>
-                  <p className="mt-4 flex-1 text-base leading-relaxed text-slate-600 line-clamp-4">{blog.summary}</p>
-                  <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
-                    <span className="inline-flex items-center gap-2 text-slate-500">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.4"
-                        className="h-4 w-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M17.512 10.193c.325-.37.325-1.016 0-1.386C15.98 7.318 12.616 4 10 4 7.384 4 4.02 7.318 2.488 8.807c-.325.37-.325 1.016 0 1.386C4.02 12.682 7.384 16 10 16c2.616 0 5.98-3.318 7.512-4.807Z"
-                        />
-                        <circle
-                          cx="10"
-                          cy="10"
-                          r="2"
-                        />
-                      </svg>
-                      {blog.views ?? 0}
+                <article className="flex h-full flex-col overflow-hidden rounded-[28px] border border-slate-100 bg-white shadow-[0_30px_110px_rgba(15,23,42,0.1)] transition hover:-translate-y-1 hover:shadow-[0_36px_140px_rgba(15,23,42,0.16)]">
+                  <div className="relative h-56 w-full overflow-hidden">
+                    <Image
+                      src={blog.coverImage || "/hero.webp"}
+                      alt={blog.title}
+                      fill
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <span className="absolute left-4 top-4 inline-flex items-center rounded-full bg-white/95 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#384B70] shadow">
+                      {formatDate(blog.publishedAt)}
                     </span>
-                    <span className="text-slate-500">{blog.readTime || 2} dk</span>
                   </div>
-                  <div className="mt-6">
-                    <Link
-                      href={`/blog/${blog.slug}`}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#384B70] transition group-hover:gap-3"
-                    >
-                      Devamını Oku
-                      <span aria-hidden="true">→</span>
-                    </Link>
+                  <div className="flex flex-1 flex-col p-8">
+                    <h2 className="text-xl font-semibold text-slate-900 leading-snug">{blog.title}</h2>
+                    <p className="mt-4 flex-1 text-base leading-relaxed text-slate-600 line-clamp-4">{blog.summary}</p>
+                    <div className="mt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">
+                      <span className="inline-flex items-center gap-2 text-slate-500">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.4"
+                          className="h-4 w-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17.512 10.193c.325-.37.325-1.016 0-1.386C15.98 7.318 12.616 4 10 4 7.384 4 4.02 7.318 2.488 8.807c-.325.37-.325 1.016 0 1.386C4.02 12.682 7.384 16 10 16c2.616 0 5.98-3.318 7.512-4.807Z"
+                          />
+                          <circle
+                            cx="10"
+                            cy="10"
+                            r="2"
+                          />
+                        </svg>
+                        {blog.views ?? 0}
+                      </span>
+                      <span className="text-slate-500">{blog.readTime || 2} dk</span>
+                    </div>
+                    <div className="mt-6">
+                      <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#384B70] transition group-hover:gap-3">
+                        Devamını Oku
+                        <span aria-hidden="true">→</span>
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </Link>
             ))
           )}
         </div>

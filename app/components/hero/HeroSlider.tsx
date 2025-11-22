@@ -26,7 +26,7 @@ const HeroSlider = () => {
   }, []);
 
   return (
-    <section className="bg-gradient-to-b from-white via-white to-slate-50 pb-16 pt-8 md:pb-20 md:pt-12">
+    <section className="bg-gradient-to-b from-[#FFF4E6] via-white to-[#ECF2FF] pb-16 pt-8 md:pb-20 md:pt-12">
       <div className="mx-auto w-full max-w-none px-0">
         <div className="relative overflow-hidden rounded-none bg-white/80 shadow-[0_35px_120px_rgba(15,23,42,0.12)] md:rounded-[40px]">
           <div className="relative min-h-[85vh] md:min-h-[95vh]">
@@ -41,7 +41,7 @@ const HeroSlider = () => {
           <button
             type="button"
             aria-label="Önceki slide"
-            className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/80 bg-white/70 p-3 text-[#384B70] shadow-md transition hover:bg-white"
+            className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-white/60 bg-white/50 p-2 text-[#384B70]/80 shadow transition backdrop-blur-sm hover:bg-white/70 sm:left-4 sm:border-white/80 sm:p-3 sm:text-[#384B70] sm:shadow-md"
             onClick={() => goToSlide("prev")}
           >
             <svg
@@ -50,7 +50,7 @@ const HeroSlider = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="h-5 w-5"
+              className="h-4 w-4 sm:h-5 sm:w-5"
             >
               <path
                 strokeLinecap="round"
@@ -62,7 +62,7 @@ const HeroSlider = () => {
           <button
             type="button"
             aria-label="Sonraki slide"
-            className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/80 bg-white/70 p-3 text-[#384B70] shadow-md transition hover:bg-white"
+            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-white/60 bg-white/50 p-2 text-[#384B70]/80 shadow transition backdrop-blur-sm hover:bg-white/70 sm:right-4 sm:border-white/80 sm:p-3 sm:text-[#384B70] sm:shadow-md"
             onClick={() => goToSlide("next")}
           >
             <svg
@@ -71,7 +71,7 @@ const HeroSlider = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="h-5 w-5"
+              className="h-4 w-4 sm:h-5 sm:w-5"
             >
               <path
                 strokeLinecap="round"

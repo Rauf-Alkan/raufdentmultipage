@@ -113,30 +113,31 @@ const Services = () => {
 
         <div className="mt-10 grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
-            <article
+            <Link
               key={service.slug}
-              className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1.5 hover:border-[#D7C3A3] hover:shadow-[0_30px_80px_rgba(15,23,42,0.15)]"
+              href={`/hizmetler/${service.slug}`}
+              className="group block h-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D7C3A3]"
+              aria-label={`${service.title} tedavi detayına git`}
             >
-              <div className="flex flex-1 flex-col">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F5EFE6] text-2xl text-[#384B70] shadow-inner">
-                  {service.icon}
-                </span>
-                <h3 className="mt-5 text-xl font-semibold text-slate-900">{service.title}</h3>
-                <p className="mt-1 text-sm font-medium text-[#384B70]">{service.tagline}</p>
-                <p className="mt-4 text-sm leading-relaxed text-slate-600">{service.description}</p>
-                <p className="mt-2 flex-1 text-sm font-medium text-slate-500">{service.detail}</p>
-              </div>
-              <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-5 text-sm font-semibold text-[#384B70]">
-                <Link
-                  href={`/hizmetler/${service.slug}`}
-                  className="inline-flex items-center gap-2 transition group-hover:gap-3"
-                >
-                  Detayları İncele
-                  <span aria-hidden="true">→</span>
-                </Link>
-                <span className="text-xs uppercase tracking-[0.35em] text-slate-400">Tedavi</span>
-              </div>
-            </article>
+              <article className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white/95 p-6 shadow-[0_18px_50px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1.5 hover:border-[#D7C3A3] hover:shadow-[0_30px_80px_rgba(15,23,42,0.15)]">
+                <div className="flex flex-1 flex-col">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F5EFE6] text-2xl text-[#384B70] shadow-inner">
+                    {service.icon}
+                  </span>
+                  <h3 className="mt-5 text-xl font-semibold text-slate-900">{service.title}</h3>
+                  <p className="mt-1 text-sm font-medium text-[#384B70]">{service.tagline}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-slate-600">{service.description}</p>
+                  <p className="mt-2 flex-1 text-sm font-medium text-slate-500">{service.detail}</p>
+                </div>
+                <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-5 text-sm font-semibold text-[#384B70]">
+                  <span className="inline-flex items-center gap-2 transition group-hover:gap-3">
+                    Tedavi detayını gör
+                    <span aria-hidden="true">→</span>
+                  </span>
+                  <span className="text-xs uppercase tracking-[0.35em] text-slate-400">Tedavi</span>
+                </div>
+              </article>
+            </Link>
           ))}
         </div>
 

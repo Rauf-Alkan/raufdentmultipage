@@ -39,7 +39,7 @@ const Home = async () => {
   return (
     <main>
       <HeroSlider />
-      <section className="bg-white py-24">
+      <section className="bg-gradient-to-b from-[#FFF7EF] via-white to-[#F2F7FF] py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">
@@ -82,7 +82,7 @@ const Home = async () => {
           </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] py-24">
+      <section className="bg-gradient-to-b from-[#EEF3FF] via-white to-[#F7F9FF] py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">Blog &amp; Makaleler</p>
@@ -97,34 +97,35 @@ const Home = async () => {
             {latestPosts.length > 0 ? (
               <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {latestPosts.map((post) => (
-                  <article
+                  <Link
                     key={post.id}
-                    className="group flex h-full flex-col overflow-hidden rounded-[28px] border border-slate-100 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.15)]"
+                    href={`/blog/${post.slug}`}
+                    className="group block h-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D7C3A3]"
+                    aria-label={`${post.title} yazısına git`}
                   >
-                    <div className="relative h-52 w-full overflow-hidden">
-                      <Image
-                        src={post.coverImage || "/hero.webp"}
-                        alt={post.title}
-                        fill
-                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                    </div>
-                    <div className="flex flex-1 flex-col p-6">
-                      <time className="text-xs font-semibold uppercase tracking-[0.35em] text-[#6B5A45]">
-                        {formatBlogDate(post.publishedAt)}
-                      </time>
-                      <h3 className="mt-3 text-xl font-semibold text-slate-900">{post.title}</h3>
-                      <p className="mt-3 flex-1 text-base leading-relaxed text-slate-600 line-clamp-3">{post.summary}</p>
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#384B70] transition hover:gap-3"
-                      >
-                        Devamını Oku
-                        <span aria-hidden="true">→</span>
-                      </Link>
-                    </div>
-                  </article>
+                    <article className="flex h-full flex-col overflow-hidden rounded-[28px] border border-slate-100 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_90px_rgba(15,23,42,0.15)]">
+                      <div className="relative h-52 w-full overflow-hidden">
+                        <Image
+                          src={post.coverImage || "/hero.webp"}
+                          alt={post.title}
+                          fill
+                          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      </div>
+                      <div className="flex flex-1 flex-col p-6">
+                        <time className="text-xs font-semibold uppercase tracking-[0.35em] text-[#6B5A45]">
+                          {formatBlogDate(post.publishedAt)}
+                        </time>
+                        <h3 className="mt-3 text-xl font-semibold text-slate-900">{post.title}</h3>
+                        <p className="mt-3 flex-1 text-base leading-relaxed text-slate-600 line-clamp-3">{post.summary}</p>
+                        <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#384B70] transition group-hover:gap-3">
+                          Devamını Oku
+                          <span aria-hidden="true">→</span>
+                        </span>
+                      </div>
+                    </article>
+                  </Link>
                 ))}
               </div>
             ) : (
