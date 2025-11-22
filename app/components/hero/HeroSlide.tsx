@@ -36,7 +36,7 @@ const HeroSlide = ({ slide, isActive }: HeroSlideProps) => {
           </div>
         </div>
 
-        <div className="relative z-10 max-w-3xl flex justify-center lg:col-span-2 lg:row-start-2 lg:justify-start lg:pl-6 xl:pl-10">
+        <div className="relative z-10 max-w-3xl flex justify-center lg:col-span-2 lg:row-start-2 lg:-mt-4 lg:justify-start lg:pl-8 xl:-mt-6 xl:pl-12">
           <HeroButtons
             primary={slide.ctaPrimary}
             secondary={slide.ctaSecondary}
