@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Header from "@/components/sections/Header";
-import Footer from "@/components/sections/Footer";
 import { services } from "@/components/sections/Services";
 
 // --- VERİ YAPISI ---
@@ -246,9 +244,7 @@ const ServiceDetailPage = async ({ params }: { params: Promise<{ slug: string }>
   }
 
   return (
-    <>
-      <Header />
-      <main className="bg-white pb-14">
+    <main className="bg-white pb-14">
         
         {/* --- YENİ HERO SECTION (About.tsx Stilinde) --- */}
         <section className="bg-white py-24 lg:py-32">
@@ -420,9 +416,7 @@ const ServiceDetailPage = async ({ params }: { params: Promise<{ slug: string }>
           </div>
         </div>
 
-      </main>
-      <Footer />
-    </>
+    </main>
   );
 };
 

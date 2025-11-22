@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import Header from "@/components/sections/Header";
 import HeroSlider from "@/components/hero/HeroSlider";
 import PatientTestimonials from "@/components/sections/PatientTestimonials";
-import Footer from "@/components/sections/Footer";
 import AppointmentForm from "@/components/forms/AppointmentForm";
 import { services } from "@/components/sections/Services";
 import { teamMembers } from "@/components/sections/Team";
@@ -39,11 +37,9 @@ const Home = async () => {
   });
 
   return (
-    <>
-      <Header />
-      <main>
-        <HeroSlider />
-        <section className="bg-white py-24">
+    <main>
+      <HeroSlider />
+      <section className="bg-white py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">
@@ -84,9 +80,9 @@ const Home = async () => {
               </Link>
             </div>
           </div>
-        </section>
+      </section>
 
-        <section className="bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] py-24">
+      <section className="bg-gradient-to-b from-[#F8FAFC] via-white to-[#F8FAFC] py-24">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">Blog &amp; Makaleler</p>
@@ -146,11 +142,11 @@ const Home = async () => {
               </Link>
             </div>
           </div>
-        </section>
+      </section>
 
-        <PatientTestimonials />
+      <PatientTestimonials />
 
-        <section className="bg-gradient-to-b from-white via-[#F6F7FB] to-white py-24">
+      <section className="bg-gradient-to-b from-white via-[#F6F7FB] to-white py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-14 text-center">
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-[#384B70]">Ekibimiz</p>
@@ -191,9 +187,9 @@ const Home = async () => {
               </Link>
             </div>
           </div>
-        </section>
+      </section>
 
-        <section className="bg-gradient-to-b from-[#F8FAFC] via-white to-[#F7F7F9] py-24">
+      <section className="bg-gradient-to-b from-[#F8FAFC] via-white to-[#F7F7F9] py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2">
               
@@ -223,12 +219,10 @@ const Home = async () => {
 
             </div>
           </div>
-        </section>
+      </section>
 
-        <div className="mx-auto mt-10 w-full max-w-6xl border-t border-slate-200" />
-        <Footer />
-      </main>
-    </>
+      <div className="mx-auto mt-10 w-full max-w-6xl border-t border-slate-200" />
+    </main>
   );
 };
 

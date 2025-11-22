@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Header from "@/components/sections/Header";
-import Footer from "@/components/sections/Footer";
 import BlogGrid from "./_components/BlogGrid";
 import { prisma } from "@/lib/db";
 
@@ -35,15 +33,11 @@ const BlogPage = async () => {
   }));
 
   return (
-    <>
-      <Header />
-      <main className="bg-gradient-to-b from-white via-slate-50 to-white py-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <BlogGrid blogs={blogs} />
-        </div>
-      </main>
-      <Footer />
-    </>
+    <main className="bg-gradient-to-b from-white via-slate-50 to-white py-16">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <BlogGrid blogs={blogs} />
+      </div>
+    </main>
   );
 };
 
