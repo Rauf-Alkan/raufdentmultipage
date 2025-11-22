@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type TouchEvent } from "react";
 
 const patientReviews = [
   {
@@ -45,7 +45,10 @@ const googleMapsUrl = "https://www.google.com/maps/place/Rauf+Alkan+Diş+Kliniğ
 
 const PatientTestimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
+  const [touchCurrentX, setTouchCurrentX] = useState<number | null>(null);
   const totalReviews = patientReviews.length;
+  const swipeThreshold = 50;
 
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + totalReviews) % totalReviews);
@@ -61,6 +64,35 @@ const PatientTestimonials = () => {
 
   const openGoogleReviews = () => {
     window.open(googleMapsUrl, "_blank");
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    setTouchStartX(event.touches[0].clientX);
+  };
+
+  const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
+    setTouchCurrentX(event.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX === null || touchCurrentX === null) {
+      setTouchStartX(null);
+      setTouchCurrentX(null);
+      return;
+    }
+
+    const deltaX = touchCurrentX - touchStartX;
+
+    if (Math.abs(deltaX) > swipeThreshold) {
+      if (deltaX < 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+
+    setTouchStartX(null);
+    setTouchCurrentX(null);
   };
 
   const renderStars = () => {
@@ -130,7 +162,13 @@ const PatientTestimonials = () => {
             </svg>
           </button>
 
-          <div className="overflow-hidden">
+          <div
+            className="overflow-hidden"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchEnd}
+          >
             <div
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}

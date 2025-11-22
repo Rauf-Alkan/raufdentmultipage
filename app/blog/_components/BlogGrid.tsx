@@ -70,7 +70,7 @@ const BlogGrid = ({ blogs }: BlogGridProps) => {
           >
             Bloglarda ara
           </label>
-          <div className="flex flex-col rounded-[999px] border border-slate-200 bg-white/90 p-2.5 shadow-lg shadow-black/5 sm:flex-row sm:items-center">
+          <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-lg shadow-black/5 sm:flex-row sm:items-center sm:gap-2 sm:rounded-[999px] sm:bg-white/90 sm:p-2.5">
             <div className="relative flex-1">
               <span className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-slate-400">
                 <svg
@@ -94,13 +94,13 @@ const BlogGrid = ({ blogs }: BlogGridProps) => {
                 placeholder="Blog yazılarında ara..."
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                className="w-full rounded-[999px] bg-transparent py-4 pl-12 pr-4 text-base text-slate-800 outline-none"
+                className="w-full rounded-xl border border-slate-100 bg-white py-3 pl-11 pr-4 text-base text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#384B70] focus:ring-2 focus:ring-[#384B70]/15 sm:border-none sm:bg-transparent sm:py-4 sm:pl-12 sm:pr-4 sm:focus:ring-0 sm:rounded-[999px]"
               />
             </div>
             <button
               type="button"
               onClick={() => setDebouncedQuery(query)}
-              className="mt-3 inline-flex items-center justify-center rounded-[999px] bg-[#384B70] px-8 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#2E3D63] sm:mt-0"
+              className="inline-flex w-full items-center justify-center rounded-xl bg-[#384B70] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#2E3D63] sm:w-auto sm:rounded-[999px] sm:px-8 sm:py-3"
             >
               Ara
             </button>

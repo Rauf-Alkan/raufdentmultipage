@@ -5,25 +5,25 @@ export const dynamic = "force-dynamic";
 
 export const teamMembers = [
   {
-    name: "Uzm. Dt. Ali Yılmaz",
+    name: "Uzm. Dt. Elif Yılmaz",
     title: "İmplant ve Cerrahi",
     photo: "/doctor1.webp",
     summary:
-      "Uludağ Üniversitesi Diş Hekimliği Fakültesi’nden mezun olan Dt. Ali, ileri implantoloji ve rehberli cerrahi üzerine uzmanlaşmıştır. Dijital planlama ve minimal invaziv tekniklere odaklanarak hastalarına en konforlu tedavi süreçlerini sunar.",
+      "Uludağ Üniversitesi Diş Hekimliği Fakültesi’nden mezun olan Dt. Elif, ileri implantoloji ve rehberli cerrahi üzerine uzmanlaşmıştır. Dijital planlama ve minimal invaziv tekniklere odaklanarak hastalarına en konforlu tedavi süreçlerini sunar.",
   },
   {
-    name: "Uzm. Dt. Ayşe Demir",
+    name: "Uzm. Dt. Zeynep Demir",
     title: "Estetik Diş Hekimi",
     photo: "/doctor2.webp",
     summary:
-      "Hacettepe Üniversitesi mezunu olan Dt. Ayşe, estetik restorasyonlar ve gülüş tasarımında 10 yılı aşkın deneyime sahiptir. Dijital mock-up ve kişiye özel renk planlama teknikleriyle doğala en yakın sonuçları hedefler.",
+      "Hacettepe Üniversitesi mezunu olan Dt. Zeynep, estetik restorasyonlar ve gülüş tasarımında 10 yılı aşkın deneyime sahiptir. Dijital mock-up ve kişiye özel renk planlama teknikleriyle doğala en yakın sonuçları hedefler.",
   },
   {
-    name: "Uzm. Dt. Emre Akman",
+    name: "Uzm. Dt. Deniz Akman",
     title: "Ortodonti ve Pedodonti",
     photo: "/doctor3.webp",
     summary:
-      "Ankara Üniversitesi mezunu Dt. Emre, şeffaf plak tedavilerini dijital ölçülerle planlar. Özellikle çocuk hastalarda davranış odaklı yaklaşımı ve koruyucu hekimlik uygulamalarıyla tanınır.",
+      "Ankara Üniversitesi mezunu Dt. Deniz, şeffaf plak tedavilerini dijital ölçülerle planlar. Özellikle çocuk hastalarda davranış odaklı yaklaşımı ve koruyucu hekimlik uygulamalarıyla tanınır.",
   },
 ];
 

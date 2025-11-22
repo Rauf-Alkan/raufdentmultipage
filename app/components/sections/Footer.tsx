@@ -16,10 +16,17 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const searchParams = useSearchParams();
+
+  const nameParam = searchParams.get("name");
+
+  const getLinkWithParam = (href: string) => {
+    if (!nameParam) return href;
+    return `${href}?name=${encodeURIComponent(nameParam)}`;
+  };
   
   // Dinamik İsim
   const clinicName = searchParams.get("name") || "Dt. Rauf Alkan";
-  const clinicFullName = searchParams.get("name") ? `${searchParams.get("name")} Kliniği` : "Rauf Alkan Diş Kliniği";
+  const clinicFullName = searchParams.get("name") ? `${searchParams.get("name")}` : "Rauf Alkan Diş Kliniği";
 
   return (
     <footer className="bg-[#F8F4EF] py-16 md:py-20">
@@ -34,7 +41,6 @@ const Footer = () => {
               />
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.35em] text-[#384B70]">{clinicFullName}</p>
-                <p className="text-lg font-semibold text-slate-900">Ankara Kızılay</p>
               </div>
             </div>
             <div className="mt-4 h-1 w-12 rounded-full bg-[#D7C3A3]" />
@@ -68,7 +74,7 @@ const Footer = () => {
               {footerServices.map((service) => (
                 <li key={service.href}>
                   <Link
-                    href={service.href}
+                    href={getLinkWithParam(service.href)}
                     className="group inline-flex items-center gap-2 transition hover:text-[#384B70]"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-[#384B70] group-hover:scale-125 transition" />
@@ -132,7 +138,7 @@ const Footer = () => {
               <li className="flex items-center gap-3">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
+                  viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   className="h-5 w-5 text-[#384B70]"
@@ -140,8 +146,8 @@ const Footer = () => {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth="1.4"
-                    d="M2 5c3 6 7 10 10 12l3-4c.5-.7.5-1.6-.1-2.3l-2.1-2.1c-.6-.6-.9-.7-1.7-.4-.6.3-1.4.6-2.1.6-.8 0-1.3-.4-1.9-1s-1-1.1-1-1.9c0-.7.3-1.5.6-2.1.4-.8.2-1.1-.4-1.7L4.3 2.1C3.6 1.5 2.7 1.5 2 2l-1 1c-.7.7-.9 1.8-.4 2.7Z"
+                    strokeWidth="1.5"
+                    d="M2.25 5.25c0 7.593 6.157 13.75 13.75 13.75.69 0 1.25-.56 1.25-1.25v-2.514c0-.61-.44-1.13-1.043-1.22l-2.453-.37c-.45-.07-.91.12-1.182.5l-.7.98c-2.093-1.04-3.783-2.73-4.823-4.823l.98-.7c.38-.272.57-.732.5-1.182l-.37-2.453c-.09-.603-.61-1.043-1.22-1.043H3.5c-.69 0-1.25.56-1.25 1.25Z"
                   />
                 </svg>
                 <a

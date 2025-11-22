@@ -27,6 +27,8 @@ const Header = () => {
 
   const clinicName = searchParams.get("name") || "Dt. Rauf Alkan";
 
+  const nameParam = searchParams.get("name");
+
   const isLinkActive = (href: string) => {
     if (href === "/") {
       return pathname === "/";
@@ -37,11 +39,16 @@ const Header = () => {
     return pathname === href;
   };
 
+  const getLinkWithParam = (href: string) => {
+    if (!nameParam) return href;
+    return `${href}?name=${encodeURIComponent(nameParam)}`;
+  };
+
   return (
     <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link
-          href="/"
+          href={getLinkWithParam("/")}
           className="flex flex-shrink-0 items-center gap-3 text-xl font-semibold text-[#384B70]"
         >
           <Image
@@ -59,7 +66,7 @@ const Header = () => {
           {navLinks.map((link) => (
             <Link
               key={link.href}
-              href={link.href}
+              href={getLinkWithParam(link.href)}
               className={`group relative inline-flex flex-col items-center gap-1 px-1 py-1 text-sm transition ${isLinkActive(link.href) ? "text-[#384B70]" : ""}`}
             >
               <span className="transition duration-200 group-hover:-translate-y-0.5">{link.label}</span>
@@ -89,7 +96,7 @@ const Header = () => {
             {navLinks.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={getLinkWithParam(link.href)}
                 className={`rounded-full px-3 py-2 transition hover:bg-[#F3EBDF] hover:text-[#384B70] ${isLinkActive(link.href) ? "text-[#384B70]" : ""}`}
                 onClick={closeMenu}
               >

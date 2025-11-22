@@ -279,8 +279,8 @@ const ServiceDetailPage = async ({ params }: { params: Promise<{ slug: string }>
                   {detail.heroDescription}
                 </p>
 
-                {/* Butonlar (About.tsx buton stilleri) */}
-                <div className="flex flex-wrap items-center gap-4">
+                {/* Butonlar (mobilde gizli) */}
+                <div className="hidden flex-wrap items-center gap-4 md:flex">
                   <Link
                     href="/iletisim"
                     className="rounded-full bg-[#384B70] px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-[#2a3a5a] shadow-[0_10px_20px_rgba(56,75,112,0.2)]"
