@@ -58,17 +58,24 @@ const Home = async () => {
             </div>
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {featuredServices.map((service) => (
-                <div
+                <Link
                   key={service.title}
-                  className="flex flex-col rounded-2xl border border-slate-100 bg-white/95 p-7 shadow-[0_20px_45px_rgba(15,23,42,0.08)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.14)]"
+                  href={`/hizmetler/${service.slug}`}
+                  className="group block h-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D7C3A3]"
+                  aria-label={`${service.title} hizmet detayına git`}
                 >
-                  <span className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#F3EBDF] text-2xl">
-                    {service.icon}
-                  </span>
-                  <h3 className="mb-3 text-xl font-semibold text-slate-900">{service.title}</h3>
-                  <p className="text-base leading-relaxed text-slate-600">{service.description}</p>
-                  <span className="mt-4 text-sm font-semibold text-[#384B70]">Detaylar için kliniğimizle iletişime geçin.</span>
-                </div>
+                  <article className="flex h-full flex-col rounded-2xl border border-slate-100 bg-white/95 p-7 shadow-[0_20px_45px_rgba(15,23,42,0.08)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_70px_rgba(15,23,42,0.14)]">
+                    <span className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#F3EBDF] text-2xl">
+                      {service.icon}
+                    </span>
+                    <h3 className="mb-3 text-xl font-semibold text-slate-900">{service.title}</h3>
+                    <p className="text-base leading-relaxed text-slate-600">{service.description}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#384B70] transition group-hover:gap-3">
+                      Detayları gör
+                      <span aria-hidden="true">→</span>
+                    </span>
+                  </article>
+                </Link>
               ))}
             </div>
             <div className="mt-12 text-center">
